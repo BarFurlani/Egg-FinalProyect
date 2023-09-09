@@ -1,13 +1,13 @@
-package com.quinchos;
+package com.EquipoB.AlquilerQuinchos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class QuinchosApplication {
+public class AlquilerQuinchosApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(QuinchosApplication.class, args);
+		SpringApplication.run(AlquilerQuinchosApplication.class, args);
 	}
 
 }

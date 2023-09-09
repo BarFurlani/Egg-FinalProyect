@@ -1,10 +1,10 @@
-package com.quinchos;
+package com.EquipoB.AlquilerQuinchos;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class QuinchosApplicationTests {
+class AlquilerQuinchosApplicationTests {
 
 	@Test
 	void contextLoads() {
