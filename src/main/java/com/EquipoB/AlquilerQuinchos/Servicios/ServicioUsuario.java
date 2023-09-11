@@ -48,7 +48,7 @@ public class ServicioUsuario {
         return repositorioUsuario.findById(id).orElseThrow(() -> new ExcepcionNoEncontrado("No se pudo encontrar al usuario con ID: " + id));
     }
     public Usuario traerUsuarioPorNombre(String username) {
-        return repositorioUsuario.findByNombre(username).orElseThrow(() -> new ExcepcionNoEncontrado("No se pudo encontrar al usuario con nombre: " + username));
+        return repositorioUsuario.findByUsername(username).orElseThrow(() -> new ExcepcionNoEncontrado("No se pudo encontrar al usuario con nombre: " + username));
     }
 
     public Usuario traerUsuarioPorEmail(String email) {
