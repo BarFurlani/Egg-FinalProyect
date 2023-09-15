@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security%22%3E">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <title>QuinchoBiliaria</title>
+</head>
+
+
+<body>
+  <section class="home" >
+    
+    <nav class="navbar">  
+          <box-icon name='party' type='solid' animation='tada' color='#ecb79a'>
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAA2xJREFUSEu1lV+IVHUUxz/nzoy7L1uuc900LBDtoSAxjKBAaYNg7t3soZcIClmbuaNZL7bRH4j2IcEsfWlD597+IwP2YhDNHWupRCVkTaKHIGolKaOduZNQGevO7D1xdWaZ2bnLrka/t3v4ne/nnN/3/H5X+J+XXK9+4LsV0BOE7DOH8qcX0lkUMFUqrEuiPWl7x/ftIoHvavStEEhjdqO5deeFOMiCgMqnb60yjNRJYF0z8W/gDMIeM+OM10reGkQPKQyh+p5p57dfE6Dqe88Jug/4FZgENgD9zao/MnQ6p0bvPSifA8dMy8lcEyDw3TPAJuBV03JeVlX5w/eGVXgjAgl6TpEQWI8yZtrOM0sGROeeEPmpmfClaTkPtJIrnx26zZg1JoAbm7HzMw294+at+X+WDAjK3kuo7mklGOjmFVY+8oOWue1iIpq7XKfYkzAcFX0UuBVYZVpOItbkwPcmQO9uiSh8V2/ovVGVge8FoN+o6F5ReRB4EZgBLrU8auWZliOxgJrvRtOR76hSZX/azo20xyJfamXvA+CJZnxS0dch+ZXZ+8ukDI42YgGV8tvrDQ1/AIyOc1XZZtq5DzvuQ8k9iLDjakz2mlYu6mhudQFqvrs7bTkHqr67X2D3PONUlGzadt5txQPfnQIGgEZ075TEnSutJ6PiriLbBarlwmpR+S0U2XKpJznRd7l+FuX2mOm4MrpN0yPhSYSjKM/Pv3QdgKBceBqVNyNTzUxuY+VYYUNCr4xkqgsifLwsOZOdrSf6+q2dP/85PpaeqS+rRGb/1ZsaWDs4PN3VQa3sHVfVLc3eXjMzzguBX9gG8n7cjKNMITKSPn2hKKOjYeC7p4D7VHTTykz+bAegdTydBkk2beXeaXs2YjkoP2LIOOhjKMvDkLsGhpxvOwBB2duF6th8U1HdZdr5g1XffVjgMNAXT5mLHjct5/4ukwPf/QIYjEtWOGBmciMXx91btCGHFTZ375OvkbBYD1NHVtvbq92Akvs7wk0LVadwKsns45GhzW6iibkBkWIiNIr9Q9nzcblzU1T13XMCaxdpf9pQHllhO/4i+7ovWrVceFZUoqd4/lKBkyHyiYocHchkW6/skhgd96Dme68oOgysAS2pypFU2Cgtf+ipi0tSi9m06D/5eoW7TP6vQgvl/wtNbmYosNqL5AAAAABJRU5ErkJggg=="/>
+          </box-icon>
+          <p class="inicio">Inicio</p>
+          <p class="productos">Productos</p>  
+          <form name="buscar" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+            <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
+          </form>
+          <div class="text-end">
+            <button type="button" class="btn btn-outline-light me-2">LogIn</button>
+            <button type="button" class="btn btn-warning">LogOut</button>
+          </div>
+    </nav>
+    <main>
+      <div>
+        <h1 class="hola">Bienvenido a QuinchoBiliaria</h1>
+      </div>
+
+      <div class="contenedor">
+        <div class="cuadrotexto">
+          <div class="p1">
+            <p>ANIMATE A VIVIR LA FIESTA DE TUS SUEÑOS</p>
+          </div>
+          <div class="p2">
+            <p>ACÁ ENCONTRARÁS EL LUGAR IDEAL PARA QUE ELLOS SE CUMPLAN</p>
+          </div>
+        </div>
+        <div class="rectangulo2">
+          <p class="p3">El comienzo de tus sueños a un click de distancia</p>
+          <button>
+            <box-icon class='chevrons-down' type='solid' animation='tada'>
+              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAMpJREFUSEvtldEKwjAMRc/8CL9SQUFBQcSBoqCgoD/od/gigQ1CbJsWuhdZX3dzD8lu04aBTzOwP/8N2AJTYOmM8Q68gUdIFxuRFC26AimMQbTuBOwsJAZ4AjMlDkG0uUhfwDwXIDoLuQAyNjlnYKPMguby3UuRhRyACbDPMc8BiOYKrCI/+gasUyHwOuhrQxDX3OvAxlRDtHnVmB6BD9B2rY0x/bkLY0yTezMW02RR7kXrTWxM3QexFOAalmzTYrOSB6eKubeLqkC+QxQ0GVjNrC8AAAAASUVORK5CYII="/>
+            </box-icon>
+          </button>
+          <button class="reg">
+            <h2>Registrate</h2>
+          </button>
+        </div>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  </main>
+  </section>
+
+</body>
+</html>
