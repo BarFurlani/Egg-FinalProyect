@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security>
-      <head th:repleace = "/fragments/head :: head" </head>
+    <head th:repleace = "/fragments/head :: head" </head>
     <body>
         <section class="home" >
-
+            
             <nav th:replace ="/fragments/navbar :: nav" </nav>
+
+       
             <main>
                 <div>
                     <h1 class="hola">Bienvenido a QuinchoBiliaria</h1>
@@ -20,11 +22,21 @@
                         </div>
                     </div>
                     <div class="rectangulo2">
-                        <p class="p3">El comienzo de tus sueños a un click de distancia</p>
+                        <form class="formulario" th:action="@{/logincheck}" method="POST">
 
-                        <button class="reg"  th:if="${session.usuariosession == null}" href="/login" role="button" aria-expanded="false">
-                            <h2>Login</h2>
-                        </button>
+
+                            <div class="form-group my-3">
+                                <h3 class="card-title">Accede a tus sueños</h3>
+                            </div>
+                            <div class="form-group my-3">
+                                <input type="text" class="form-control" name="mail" placeholder="E-mail">
+                            </div>
+                            <div class="form-group my-3">
+                                <input type="password" class="form-control" name="password" placeholder="Contraseña">
+
+
+                                <button type="submit" class="btn btn-primary mt-3 botones">Ingresar!</button>
+                        </form>
                     </div>
                 </div>
 
