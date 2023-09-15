@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security>
+    <head th:repleace = "/fragments/head :: head" </head>
+    <body>
+        <section class="home" >
+
+            <nav th:replace ="/fragments/navbar :: nav" </nav>
+            <main>
+                <div>
+                    <h1 class="hola">Bienvenido a QuinchoBiliaria</h1>
+                </div>
+
+                <div class="contenedor">
+                    <div class="cuadrotexto">
+                        <div class="p1">
+                            <p>ANIMATE A VIVIR LA FIESTA DE TUS SUEÑOS</p>
+                        </div>
+                        <div class="p2">
+                            <p>ACÁ ENCONTRARÁS EL LUGAR IDEAL PARA QUE ELLOS SE CUMPLAN</p>
+                        </div>
+                    </div>
+                    <div class="rectangulo2">
+                        <p class="p3">El comienzo de tus sueños a un click de distancia</p>
+
+                        <button class="reg"  th:if="${session.usuariosession == null}" href="/login" role="button" aria-expanded="false">
+                            <h2>Login</h2>
+                        </button>
+                    </div>
+                </div>
+
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+            </main>
+        </section>
+
+    </body>
+</html>
