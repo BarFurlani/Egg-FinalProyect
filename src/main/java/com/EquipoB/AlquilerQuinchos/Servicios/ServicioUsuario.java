@@ -40,6 +40,18 @@ public class ServicioUsuario implements UserDetailsService {
         return repositorioUsuario.save(usuario);
     }
 
+    @Transactional
+    public Usuario registrarUsuario(String nombre,String email,String password,  String password2) {
+        if (password.equals(password2)) {
+            Usuario usuarioAux = new Usuario(nombre, email , password);
+            validacion(usuarioAux);
+            return repositorioUsuario.save(usuarioAux);
+        }else {
+            throw new ExcepcionInformacionInvalida("los password deben ser iguales");
+        }
+    }
+
+
     //MÉTODOS PARA LEER USUARIOS
 
     public List<Usuario> traerATodosLosUsuarios() {
