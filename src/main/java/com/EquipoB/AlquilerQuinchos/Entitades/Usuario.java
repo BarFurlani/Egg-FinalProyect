@@ -46,4 +46,10 @@ public class Usuario {
         this.propiedades = propiedades;
         this.propiedadAlquilada = propiedadAlquilada;
     }
+
+    public Usuario(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
 }
