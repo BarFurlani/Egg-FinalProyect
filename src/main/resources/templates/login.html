@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security>
-    <head th:repleace = "/fragments/head :: head" </head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head th:replace = "/fragments/head :: head"> </head>
     <body>
         <section class="home" >
             
-            <nav th:replace ="/fragments/navbar :: nav" </nav>
+            <nav th:replace ="/fragments/navbar :: nav"> </nav>
 
        
             <main>
@@ -36,6 +36,7 @@
 
 
                                 <button type="submit" class="btn btn-primary mt-3 botones">Ingresar!</button>
+                                </div>
                         </form>
                     </div>
                 </div>
