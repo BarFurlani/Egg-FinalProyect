@@ -6,6 +6,7 @@ import com.EquipoB.AlquilerQuinchos.Excepciones.ExcepcionInformacionInvalida;
 import com.EquipoB.AlquilerQuinchos.Excepciones.ExcepcionNoEncontrado;
 import com.EquipoB.AlquilerQuinchos.Repositorios.RepositorioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -42,12 +43,16 @@ public class ServicioUsuario implements UserDetailsService {
 
     @Transactional
     public Usuario registrarUsuario(String nombre,String email,String password,  String password2) {
-        if (password.equals(password2)) {
-            Usuario usuarioAux = new Usuario(nombre, email , password);
-            validacion(usuarioAux);
-            return repositorioUsuario.save(usuarioAux);
-        }else {
-            throw new ExcepcionInformacionInvalida("los password deben ser iguales");
+        try {
+            if (password.equals(password2)) {
+                Usuario usuarioAux = new Usuario(nombre, email, password);
+                validacion(usuarioAux);
+                return repositorioUsuario.save(usuarioAux);
+            } else {
+                throw new ExcepcionInformacionInvalida("los password deben ser iguales");
+            }
+        } catch (DataIntegrityViolationException exception) {
+            throw new ExcepcionInformacionInvalida("Nombre de usuario o email no disponibles");
         }
     }
 
