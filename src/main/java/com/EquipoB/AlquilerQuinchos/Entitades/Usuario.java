@@ -42,6 +42,8 @@ public class Usuario {
         this.username = username;
         this.email = email;
         this.password = password;
+//        agregar telefono
+
         this.alta = alta;
         this.baja = baja;
         this.rol = rol;

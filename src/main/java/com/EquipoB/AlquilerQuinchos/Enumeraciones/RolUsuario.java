@@ -5,6 +5,7 @@ import lombok.Getter;
 @Getter
 public enum RolUsuario {
     ROL_ADMINISTRADOR("Administrador"),
+
     ROL_PROPIETARIO("Propietario"),
     ROL_INQUILINO("Inquilino");
 

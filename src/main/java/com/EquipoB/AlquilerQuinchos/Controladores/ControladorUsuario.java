@@ -75,4 +75,23 @@ public class ControladorUsuario {
         return "inicio.html";
     }
 
+    @GetMapping("/perfil")
+    public String perfil(@RequestParam(required = false) String error, ModelMap modelo) {
+
+        if (error != null) {
+            modelo.put("error", "Usuario o contraseña inválidos.");//envia un mensaje a la vista mediante un modelo, con la referencia "error" si la variable error contiene una excepción.
+        }
+        return "usuario.html";//vista de formulario para inicio de sesion.
+    }
+
+//    metodo proboar html propiedades borrar para que no pise al de jose
+    @GetMapping("/propiedades")
+    public String propiedades(@RequestParam(required = false) String error, ModelMap modelo) {
+
+        if (error != null) {
+            modelo.put("error", "Usuario o contraseña inválidos.");//envia un mensaje a la vista mediante un modelo, con la referencia "error" si la variable error contiene una excepción.
+        }
+        return "registro_propiedades.html";//vista de formulario para inicio de sesion.
+    }
+
 }
