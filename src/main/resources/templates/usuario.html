@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security>
+      <head th:repleace = "/fragments/head :: head" </head>
+    <body>
+        <section class="usuarios" >
+
+            <nav th:replace ="/fragments/navbar :: nav" </nav>
+            <main>
+                <div>
+                    <h1 class="hola">Bienvenido a QuinchoBiliaria</h1>
+                </div>                                  
+                              <div class="contenedor">
+                                <div class="row">
+                                    <div class="col-6 col-md-6 col-lg-6 col-xl-6">
+                                        
+                                            <a th:href="@{/reservar_propiedad}"><img src="data:image/png;base64,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" alt="Logo" width="20" height="20"> </a> Hacer reserva
+                                    
+                                      
+                                    </div>
+                                    <div class="col-6 col-md-6 col-lg-6 col-xl-6">
+                                      
+                                            <a th:href="@{/propiedades}"></a><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRs9OEDmiPsjDg3sRAkTQ_mlcCCbaW0Nbj6fw&usqp=CAU" alt="Logo" width="20" height="20"> </a>Tus propiedades
+                                        
+                                        
+                                    </div>
+                                    <div class="col-6 col-md-6 col-lg-6 col-xl-6">
+                                      
+                                        <a th:href="@{/reservas_pasadas}"><img src="https://e7.pngegg.com/pngimages/829/233/png-clipart-small-black-pig-computer-icons-balloon-black-balloons-s-photography-black.png" alt="Logo" width="20" height="20"> </a>Reservas pasadas
+                                       
+                                    </div>
+                                    <div class="col-6 col-md-6 col-lg-6 col-xl-6"sec.authorize="hasRoll('Propietario')" >
+                                        <a th:href="@{/registro_propiedades}">
+                                            <img src="https://e7.pngegg.com/pngimages/587/356/png-clipart-computer-icons-plus-and-minus-signs-addition-cdr-cross.png" alt="Logo" width="20" height="20"> </a> propiedades
+                                      
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="rectangulo2">
+                        <div class="container mt-5">
+                            <div class="row">
+                                <div class="col-md-6 offset-md-3">
+                                    <h1>Datos del Usuario</h1>
+                                    <hr>
+                                    <div class="text-center">
+                                        <img src="URL_DE_LA_IMAGEN_DEL_USUARIO" alt="Avatar del Usuario" class="img-fluid rounded-circle">
+                                    </div>
+                                    <div class="form-group mt-3">
+                                        <label for="nombre">Nombre:</label>
+                                        <input type="text" class="form-control" id="nombre" value="Nombre del Usuario" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email:</label>
+                                        <input type="email" class="form-control" id="email" value="correo@ejemplo.com" readonly>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="roll">Roll Usuario:</label>
+                                        <input type="roll" class="form-control" id="roll" value="Roll del usuario" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+            </main>
+        </section>
+        
+        <footer th:repleace ="/fragments!footer :: footer"</footer>
+            
+
+    </body>
+    
+</html>
