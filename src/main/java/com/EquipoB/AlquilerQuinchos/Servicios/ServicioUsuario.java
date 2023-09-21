@@ -43,6 +43,7 @@ public class ServicioUsuario implements UserDetailsService {
 
     @Transactional
     public Usuario registrarUsuario(String nombre,String email,String password,  String password2) {
+
         try {
             if (password.equals(password2)) {
                 Usuario usuarioAux = new Usuario(nombre, email, password);
