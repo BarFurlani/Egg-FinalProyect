@@ -13,8 +13,11 @@ public class PortalControlador {
         return "index.html";
     }
 
-    @GetMapping("/login")
-    public String login(){
-        return "login.html";
+//    este metodo va servir si para presentar otro index
+    @GetMapping("/inicio")
+    public String inicio(){
+        return "index.html";
     }
+
+
 }

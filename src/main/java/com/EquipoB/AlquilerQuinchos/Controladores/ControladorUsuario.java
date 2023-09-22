@@ -36,9 +36,11 @@ public class ControladorUsuario {
         return "registro_usuario.html"; // formulario de registro de usuario
     }
 
+
+//    agregar parametro de rol
     @PostMapping("/registro")// post de formulario de registro de usuario, con los datos ingresados
     public String registro(@RequestParam String usuarioNombre, @RequestParam String usuarioEmail, @RequestParam String password, @RequestParam String password2, ModelMap modelo) {
-        System.out.println(usuarioEmail.toString());
+
         try {
             ServicioUsuario.registrarUsuario(usuarioNombre, usuarioEmail, password, password2);
 
@@ -63,6 +65,10 @@ public class ControladorUsuario {
         return "login.html";//vista de formulario para inicio de sesion.
     }
 
+
+
+
+
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/inicio")
     public String inicio(HttpSession session) {
@@ -83,6 +89,8 @@ public class ControladorUsuario {
         }
         return "usuario.html";//vista de formulario para inicio de sesion.
     }
+
+
 
 //
 }
