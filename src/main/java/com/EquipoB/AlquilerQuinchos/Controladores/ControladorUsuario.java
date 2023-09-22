@@ -63,6 +63,10 @@ public class ControladorUsuario {
         return "login.html";//vista de formulario para inicio de sesion.
     }
 
+
+
+
+
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/inicio")
     public String inicio(HttpSession session) {
@@ -83,6 +87,8 @@ public class ControladorUsuario {
         }
         return "usuario.html";//vista de formulario para inicio de sesion.
     }
+
+
 
 //
 }

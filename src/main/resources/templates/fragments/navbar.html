@@ -9,7 +9,7 @@
     </form>
     <div class="text-end">
         <a th:href="@{/usuario/registrar}"><button type="button" class="btn btn-outline-light me-2"  th:if="${session.usuariosession == null}" href="/registrar" role="button" aria-expanded="false">   Registrate!! </button></a>
-        <a th:href="@{/login}"><button type="button" class="btn btn-outline-light me-2"  th:if="${session.usuariosession == null}"  role="button" aria-expanded="false"> LogIn </button></a>
-         <button type="button" class="btn btn-outline-light me-2" th:if="${session.usuariosession != null}" href="/logout" role="button" aria-expanded="false"> LogOut </button>
+        <a th:href="@{/usuario/login}"><button type="button" class="btn btn-outline-light me-2"  th:if="${session.usuariosession == null}"  role="button" aria-expanded="false"> LogIn </button></a>
+        <a th:href="@{/logout}"> <button type="button" class="btn btn-outline-light me-2" th:if="${session.usuariosession != null}"  role="button" aria-expanded="false"> LogOut </button></a>
     </div>
 </nav>
