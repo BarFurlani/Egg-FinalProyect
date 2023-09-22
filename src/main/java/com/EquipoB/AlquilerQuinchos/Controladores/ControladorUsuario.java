@@ -36,9 +36,11 @@ public class ControladorUsuario {
         return "registro_usuario.html"; // formulario de registro de usuario
     }
 
+
+//    agregar parametro de rol
     @PostMapping("/registro")// post de formulario de registro de usuario, con los datos ingresados
     public String registro(@RequestParam String usuarioNombre, @RequestParam String usuarioEmail, @RequestParam String password, @RequestParam String password2, ModelMap modelo) {
-        System.out.println(usuarioEmail.toString());
+
         try {
             ServicioUsuario.registrarUsuario(usuarioNombre, usuarioEmail, password, password2);
 

@@ -24,16 +24,17 @@
           </div>
           <div class="rectangulo2">
             <p class="p3">El comienzo de tus sueños a un click de distancia</p>
-
+            <a th:href="@{/usuario/login}">
             <button
               class="reg"
               th:if="${session.usuariosession == null}"
-              href="/login"
+
               role="button"
               aria-expanded="false"
             >
               <h2>Login</h2>
             </button>
+            </a>
           </div>
         </div>
 

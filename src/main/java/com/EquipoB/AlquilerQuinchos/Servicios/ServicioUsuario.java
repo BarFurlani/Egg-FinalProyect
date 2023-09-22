@@ -50,6 +50,7 @@ public class ServicioUsuario implements UserDetailsService {
             if (password.equals(password2)) {
                 Usuario usuarioAux = new Usuario(nombre, email, password);
                 usuarioAux.setPassword(new BCryptPasswordEncoder().encode(password));
+//                poner if para cambiar rol
                 usuarioAux.setRol(RolUsuario.ROL_PROPIETARIO);
                 validacion(usuarioAux);
                 return repositorioUsuario.save(usuarioAux);
