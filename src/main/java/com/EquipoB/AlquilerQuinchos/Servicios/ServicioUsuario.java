@@ -2,6 +2,7 @@ package com.EquipoB.AlquilerQuinchos.Servicios;
 
 import com.EquipoB.AlquilerQuinchos.Entitades.Propiedad;
 import com.EquipoB.AlquilerQuinchos.Entitades.Usuario;
+import com.EquipoB.AlquilerQuinchos.Enumeraciones.RolUsuario;
 import com.EquipoB.AlquilerQuinchos.Excepciones.ExcepcionInformacionInvalida;
 import com.EquipoB.AlquilerQuinchos.Excepciones.ExcepcionNoEncontrado;
 import com.EquipoB.AlquilerQuinchos.Repositorios.RepositorioUsuario;
@@ -13,6 +14,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -35,17 +37,27 @@ public class ServicioUsuario implements UserDetailsService {
 
     //MÉTODO PARA CREAR USUARIOS
 
-    @Transactional
+  @Transactional
     public Usuario registrarUsuario(Usuario usuario) {
         validacion(usuario);
         return repositorioUsuario.save(usuario);
     }
 
     @Transactional
-    public Usuario registrarUsuario(String nombre,String email,String password,  String password2) {
+    public Usuario registrarUsuario(String nombre,String email,String password,  String password2, String rolSeleccionado) {
+
         try {
             if (password.equals(password2)) {
                 Usuario usuarioAux = new Usuario(nombre, email, password);
+                usuarioAux.setPassword(new BCryptPasswordEncoder().encode(password));
+                
+                //PARA ASIGNAR ROL SEGÚN LO QUE SE SELECCIONE EN LA VISTA
+                if ("PROPIETARIO".equalsIgnoreCase(rolSeleccionado)) {
+                    usuarioAux.setRol(RolUsuario.ROL_PROPIETARIO);
+                }else{
+                    usuarioAux.setRol(RolUsuario.ROL_INQUILINO);
+                }
+                
                 validacion(usuarioAux);
                 return repositorioUsuario.save(usuarioAux);
             } else {

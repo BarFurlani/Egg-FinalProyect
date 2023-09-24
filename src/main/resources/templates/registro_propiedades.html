@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      <head th:replace = "/fragments/head :: head"> </head>
+<body>
+    <section class="usuarios" >
+
+        <nav th:replace ="/fragments/navbar :: nav"> </nav>
+    <div class="rectangulo2">
+<!--        cambiar metodo a post y poner la ruta -->
+        <form class="formulario" th:action="formulario.html" method="get" enctype="multipart/form-data" >
+
+            <div class="form-group my-3">
+                <h3 class="card-title">REGISTRA TU PROPIEDAD</h3>
+            </div>
+            <div class="form-group my-3">
+                <input type="text" class="form-control" name="propiedadNombre" placeholder="NOMBRE DE LA PROPIEDAD" th:value="${propiedadNombre}" aria-label="Nombre">
+            </div>
+<!--            tal vez se pueda borrar -->
+            <div class="form-group my-3">
+                <input type="text" class="form-control" name="pais" placeholder="PAIS" th:value="${propiedadPais}" aria-label="Pais">
+            </div>
+            <div class="form-group my-3">
+                <input type="text" class="form-control" name="ciudad" placeholder="CIUDAD" th:value="${propiedadCiudad}" aria-label="Ciudad">
+            </div>
+
+            <div class="form-group my-3">
+                <input type="text" class="form-control" name="direccion" placeholder="DIRECCION" th:value="${propiedadDireccion}" aria-label="Direccion">
+            </div>
+            <div class="form-group my-3">    
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="colFormLabel" placeholder="EMAIL" th:value="${usuarioEmail}" aria-label="Email">
+                  </div>
+            </div>
+            <div class="form-group my-3">
+                <input type="tel" class="form-control" name="telefono" placeholder="NUMERO DE TELEFONO" th:value="${telefono}" aria-label="Número de Teléfono">
+            </div>
+
+            <div class="form-group my-3">
+                <input type="text" class="form-control" name="precio" placeholder="PRECIO POR NOCHE" th:value="${precioNoche}" aria-label="Precio">
+            </div>
+            <div class="form-group my-3">
+                <label for="descripcion">DESCRIPCION DEL PRODUCTO:</label>
+                <textarea class="form-control" name="descripcion" id="descripcion" placeholder="Escribe una descripción del producto: que incluye el alquiler del lugar. Ejemplo wifi, sistema de sonido, manteleria, vajilla, frezer, servicios (si es que brindan alguno)" rows="4" th:text="${descripcion}"></textarea>
+            </div>
+            <div class="form-group my-3">
+                <label for="imagenes">SUBIR IMAGENES:</label>
+                <input type="file" name="imagenes[]" id="imagenes" multiple accept="image/*">
+            </div>
+<!--            <div class="form-group my-3">-->
+<!--                <input type="password" class="form-control" name="password" placeholder="CONTRASEÑA" th:value="${password}">-->
+<!--            </div>-->
+<!--            <div class="form-group my-3">-->
+<!--                <input type="password" class="form-control" name="password2" placeholder="REPETIR CONTRASEÑA" th:value="${password2}">-->
+<!--            </div>        -->
+
+            <button type="submit" class="btn btn-primary mt-3 botones">GUARDAR PROPIEDAD</button>
+
+        </form> 
+    </div>
+    <footer th:replace ="/fragments/footer :: footer"> </footer>
+    </section >
+</body>
+</html>
+

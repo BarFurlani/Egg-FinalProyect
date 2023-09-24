@@ -15,9 +15,9 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long  id;
-    @Column(unique = true)
+//    @Column(unique = true)
     private String username;
-    @Column(unique = true)
+//    @Column(unique = true)
     private String email;
     private String password;
     private boolean alta;
@@ -42,6 +42,8 @@ public class Usuario {
         this.username = username;
         this.email = email;
         this.password = password;
+//        agregar telefono
+
         this.alta = alta;
         this.baja = baja;
         this.rol = rol;
