@@ -37,12 +37,12 @@ public class ControladorUsuario {
     }
 
 
-//    agregar parametro de rol
+
     @PostMapping("/registro")// post de formulario de registro de usuario, con los datos ingresados
-    public String registro(@RequestParam String usuarioNombre, @RequestParam String usuarioEmail, @RequestParam String password, @RequestParam String password2, ModelMap modelo) {
+    public String registro(@RequestParam String usuarioNombre, @RequestParam String usuarioEmail, @RequestParam String password, @RequestParam String password2,@RequestParam("Rol") String rolSeleccionado, ModelMap modelo) {
 
         try {
-            ServicioUsuario.registrarUsuario(usuarioNombre, usuarioEmail, password, password2);
+            ServicioUsuario.registrarUsuario(usuarioNombre, usuarioEmail, password, password2, rolSeleccionado);
 
             modelo.put("exito", "Usuario registrado correctamente");// para enviar mensaje a la vista mediante un modelo llamado, con la referencia "exito"
             return "index.html"; //retorna nuevamente vista inicio 
