@@ -1,6 +1,7 @@
 package com.EquipoB.AlquilerQuinchos.Entitades;
 
 import com.EquipoB.AlquilerQuinchos.Enumeraciones.RolUsuario;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -9,7 +10,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Getter @Setter @ToString
+@Getter @Setter @ToString @AllArgsConstructor
 public class Usuario {
 
     @Id
@@ -23,6 +24,14 @@ public class Usuario {
     private boolean alta;
     private boolean baja;
 
+    @ElementCollection
+    @CollectionTable(name = "reviews_usuario", joinColumns = @JoinColumn(name = "usuario_id"))
+    @OneToMany(mappedBy = "inquilino", fetch = FetchType.LAZY)
+    private List<Review> review;
+
+    @OneToOne
+    private Imagen imagen;
+
     @Enumerated(EnumType.STRING)
     private RolUsuario rol;
 
@@ -35,18 +44,6 @@ public class Usuario {
     //Constructores
 
     public Usuario() {
-    }
-
-    public Usuario(Long id, String username, String email, String password, boolean alta, boolean baja, RolUsuario rol, List<Propiedad> propiedades, Propiedad propiedadAlquilada) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.alta = alta;
-        this.baja = baja;
-        this.rol = rol;
-        this.propiedades = propiedades;
-        this.propiedadAlquilada = propiedadAlquilada;
     }
 
     public Usuario(String username, String email, String password) {
