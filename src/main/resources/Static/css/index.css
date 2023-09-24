@@ -89,10 +89,11 @@
 
 .reg {
     
-    height: 97px;
+    height: 60px;
     flex-shrink: 0;
     border-radius: 30px;
     background: rgba(0, 0, 0, 0.78);
+    margin-top: 20px;
 }
 
 .h2 {
@@ -105,6 +106,16 @@
     line-height: normal;
 }
 
+.btn3 {
+    width: 100px;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.78);
+    color: #FFF;
+    margin-top: 50px;
+}
+
 /*Navbar*/
 
 .navbar {
@@ -115,6 +126,7 @@
     width: 100%;
     display: flex;
     height: 69px;
+    margin-bottom: 50px;
 }
 
 .navbar p {
@@ -128,7 +140,9 @@
 
 form[name="buscar"]  {
     margin-right: auto;
+    color:#f3e1e1;
 }
+
 form[name="buscar"] input {
     width: 317px;
     height: 51px;
@@ -139,8 +153,6 @@ form[name="buscar"] input {
     font-family: Inter, sans-serif;
     font-size: 16px;
 }
-
-
 
 .buscar {
     width: 317px;
@@ -154,7 +166,7 @@ form[name="buscar"] input {
     color: #FFF;
     text-align: center;
     font-family: Inria Sans;
-    font-size: 25px;
+    font-size: 20px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -165,8 +177,27 @@ form[name="buscar"] input {
     color: #FFF;
     text-align: center;
     font-family: Inria Sans;
-    font-size: 25px;
+    font-size: 20px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    text-decoration: none;
+}
+
+/*Footer*/
+
+.footer {
+    background-color: rgba(217, 217, 217, 0.25);
+    align-items: center;
+    padding: 0 24px;
+    width: 100%;
+    display: flex;
+    height: 50px;
+}
+
+.nombrefoot {
+    color: #000000;
+    text-align: center;
+    line-height: normal;
+    font-weight: 600px;
 }

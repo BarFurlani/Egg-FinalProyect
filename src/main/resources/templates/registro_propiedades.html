@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-      <head th:replace = "/fragments/head :: head"> </head>
+      <head th:replace = "/fragments/head :: head"> 
+           <link rel="stylesheet" th:href="@{/css/usuarios.css}">
+      </head>
 <body>
-    <section class="usuarios" >
-
         <nav th:replace ="/fragments/navbar :: nav"> </nav>
-    <div class="rectangulo2">
+    <section class="propiedad" >
+        
+    <div class="rectanguloReg1">
 <!--        cambiar metodo a post y poner la ruta -->
         <form class="formulario" th:action="formulario.html" method="get" enctype="multipart/form-data" >
 
@@ -40,12 +42,13 @@
 <!--                <input type="password" class="form-control" name="password2" placeholder="REPETIR CONTRASEÑA" th:value="${password2}">-->
 <!--            </div>        -->
 
-            <button type="submit" class="btn btn-primary mt-3 botones">GUARDAR PROPIEDAD</button>
+            <button type="submit" class="btn4">GUARDAR PROPIEDAD</button>
 
         </form> 
     </div>
+    </section>
     <footer th:replace ="/fragments/footer :: footer"> </footer>
-    </section >
+    
 </body>
 </html>
 
