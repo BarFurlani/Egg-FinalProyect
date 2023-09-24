@@ -33,21 +33,23 @@ public class ControladorUsuario {
          
     @GetMapping("/registrar")
     public String registrar() {
-        return "registro.html"; // formulario de registro de usuario
+        return "registro_usuario.html"; // formulario de registro de usuario
     }
 
+
+//    agregar parametro de rol
     @PostMapping("/registro")// post de formulario de registro de usuario, con los datos ingresados
-    public String registro(@RequestParam String nombre, @RequestParam String email, @RequestParam String password, @RequestParam String password2, ModelMap modelo) {
+    public String registro(@RequestParam String usuarioNombre, @RequestParam String usuarioEmail, @RequestParam String password, @RequestParam String password2, ModelMap modelo) {
 
         try {
-            ServicioUsuario.registrarUsuario(nombre, email, password, password2);
+            ServicioUsuario.registrarUsuario(usuarioNombre, usuarioEmail, password, password2);
 
             modelo.put("exito", "Usuario registrado correctamente");// para enviar mensaje a la vista mediante un modelo llamado, con la referencia "exito"
             return "index.html"; //retorna nuevamente vista inicio 
 
         } catch (ExcepcionInformacionInvalida ex) {
             modelo.put("error", ex.getMessage());//mensaje de error enviado a la vista mediante un modelo, con la referencia "error".
-            modelo.put("email", email);
+            modelo.put("email", usuarioEmail);
             return "registro.html";//retorna nuevamente vista inicio.
         }
 
@@ -63,6 +65,10 @@ public class ControladorUsuario {
         return "login.html";//vista de formulario para inicio de sesion.
     }
 
+
+
+
+
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/inicio")
     public String inicio(HttpSession session) {
@@ -75,4 +81,16 @@ public class ControladorUsuario {
         return "inicio.html";
     }
 
+    @GetMapping("/perfil")
+    public String perfil(@RequestParam(required = false) String error, ModelMap modelo) {
+
+        if (error != null) {
+            modelo.put("error", "Usuario o contraseña inválidos.");//envia un mensaje a la vista mediante un modelo, con la referencia "error" si la variable error contiene una excepción.
+        }
+        return "usuario.html";//vista de formulario para inicio de sesion.
+    }
+
+
+
+//
 }

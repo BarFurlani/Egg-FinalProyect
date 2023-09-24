@@ -16,9 +16,9 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long  id;
-    @Column(unique = true)
+//    @Column(unique = true)
     private String username;
-    @Column(unique = true)
+//    @Column(unique = true)
     private String email;
     private String password;
     private boolean alta;
@@ -45,6 +45,22 @@ public class Usuario {
 
     public Usuario() {
     }
+
+
+    public Usuario(Long id, String username, String email, String password, boolean alta, boolean baja, RolUsuario rol, List<Propiedad> propiedades, Propiedad propiedadAlquilada) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+//        agregar telefono
+
+        this.alta = alta;
+        this.baja = baja;
+        this.rol = rol;
+        this.propiedades = propiedades;
+        this.propiedadAlquilada = propiedadAlquilada;
+    }
+
 
     public Usuario(String username, String email, String password) {
         this.username = username;

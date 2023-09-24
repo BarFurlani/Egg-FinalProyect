@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security>
-      <head th:repleace = "/fragments/head :: head" </head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      <head th:replace = "/fragments/head :: head"> </head>
     <body>
         <section class="usuarios" >
 
-            <nav th:replace ="/fragments/navbar :: nav" </nav>
+            <nav th:replace ="/fragments/navbar :: nav"> </nav>
             <main>
                 <div>
                     <h1 class="hola">Bienvenido a QuinchoBiliaria</h1>
@@ -29,7 +29,7 @@
                                        
                                     </div>
                                     <div class="col-6 col-md-6 col-lg-6 col-xl-6"sec.authorize="hasRoll('Propietario')" >
-                                        <a th:href="@{/registro_propiedades}">
+                                        <a th:href="@{/propiedades/registro}">
                                             <img src="https://e7.pngegg.com/pngimages/587/356/png-clipart-computer-icons-plus-and-minus-signs-addition-cdr-cross.png" alt="Logo" width="20" height="20"> </a> propiedades
                                       
                                     </div>
@@ -68,7 +68,7 @@
             </main>
         </section>
         
-        <footer th:repleace ="/fragments!footer :: footer"</footer>
+        <footer th:replace ="/fragments/footer :: footer"></footer>
             
 
     </body>
