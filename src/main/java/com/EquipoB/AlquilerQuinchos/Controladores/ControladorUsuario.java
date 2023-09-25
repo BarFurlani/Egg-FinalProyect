@@ -28,7 +28,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/usuario")
 public class ControladorUsuario {
     
-       @Autowired
+    @Autowired
     private ServicioUsuario ServicioUsuario;
          
     @GetMapping("/registrar")

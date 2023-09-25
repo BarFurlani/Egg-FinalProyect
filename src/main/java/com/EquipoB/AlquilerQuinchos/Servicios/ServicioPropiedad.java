@@ -1,5 +1,6 @@
 package com.EquipoB.AlquilerQuinchos.Servicios;
 
+import com.EquipoB.AlquilerQuinchos.Entitades.Imagen;
 import com.EquipoB.AlquilerQuinchos.Entitades.Propiedad;
 import com.EquipoB.AlquilerQuinchos.Entitades.Usuario;
 import com.EquipoB.AlquilerQuinchos.Enumeraciones.TipoDePropiedad;
@@ -10,7 +11,9 @@ import com.EquipoB.AlquilerQuinchos.Repositorios.RepositorioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
@@ -22,12 +25,14 @@ public class ServicioPropiedad {
     private final RepositorioPropiedad repositorioPropiedad;
     private final RepositorioUsuario repositorioUsuario;
     private final ServicioUsuario servicioUsuario;
+    private final ServicioImagen servicioImagen;
 
     @Autowired
-    public ServicioPropiedad(RepositorioPropiedad repositorioPropiedad, RepositorioUsuario repositorioUsuario, ServicioUsuario servicioUsuario) {
+    public ServicioPropiedad(RepositorioPropiedad repositorioPropiedad, RepositorioUsuario repositorioUsuario, ServicioUsuario servicioUsuario, ServicioImagen servicioImagen) {
         this.repositorioPropiedad = repositorioPropiedad;
         this.repositorioUsuario = repositorioUsuario;
         this.servicioUsuario = servicioUsuario;
+        this.servicioImagen = servicioImagen;
     }
 
     //CREATE
@@ -142,6 +147,31 @@ public class ServicioPropiedad {
         servicios.remove(servicio);
         propiedad.setServicios(servicios);
         return repositorioPropiedad.save(propiedad);
+    }
+
+    @Transactional
+    public void agregarImagen(Propiedad propiedad, MultipartFile archivo) throws IOException {
+        servicioImagen.validacion(archivo);
+        Imagen imagen = servicioImagen.guardarImagen(archivo);
+        propiedad.getImagenes().add(imagen);
+        repositorioPropiedad.save(propiedad);
+    }
+
+    public List<Imagen> mostrarImagenes(Propiedad propiedad) {
+        return propiedad.getImagenes();
+    }
+
+    @Transactional
+    public void eliminarImagen(Propiedad propiedad, Long imagen_id) {
+        Imagen imagen = propiedad.getImagenes().stream()
+                .filter(imagen1 -> imagen1.getId().equals(imagen_id))
+                .findFirst()
+                .orElseThrow(() -> new ExcepcionNoEncontrado("Imagen no encontrada"));
+
+        propiedad.getImagenes().remove(imagen);
+        servicioImagen.eliminarImagen(imagen_id);
+
+        repositorioPropiedad.save(propiedad);
     }
 
     public void validacion(Propiedad propiedad) {

@@ -35,6 +35,14 @@ public class Propiedad {
     private String reglas;
 
     @ElementCollection
+    @CollectionTable(name = "reviews_propiedad", joinColumns = @JoinColumn(name = "propiedad_id"))
+    @OneToMany(mappedBy = "propiedad", fetch = FetchType.LAZY)
+    private List<Review> review;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "propiedad", fetch = FetchType.LAZY)
+    private List<Imagen> imagenes;
+
+    @ElementCollection
     @CollectionTable(name = "servicios_propiedad", joinColumns = @JoinColumn(name = "propiedad_id"))
     @Column(name = "servicios")
     private List<String> servicios;
