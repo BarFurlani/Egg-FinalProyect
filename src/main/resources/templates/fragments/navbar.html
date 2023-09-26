@@ -10,6 +10,7 @@
     <div class="text-end">
         <a th:href="@{/usuario/registrar}"><button type="button" class="btn btn-outline-light me-2"  th:if="${session.usuariosession == null}" href="/registrar" role="button" aria-expanded="false">   Registrate! </button></a>
         <a th:href="@{/usuario/login}"><button type="button" class="btn btn-outline-light me-2"  th:if="${session.usuariosession == null}"  role="button" aria-expanded="false"> Login </button></a>
+        <a th:href="@{/usuario/perfil}"> <button type="button" class="btn btn-outline-light me-2" th:if="${session.usuariosession != null}"  role="button" aria-expanded="false"> Perfil </button></a>
         <a th:href="@{/logout}"> <button type="button" class="btn btn-outline-light me-2" th:if="${session.usuariosession != null}"  role="button" aria-expanded="false"> Logout </button></a>
     </div>
 </nav>
