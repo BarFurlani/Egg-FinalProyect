@@ -45,12 +45,12 @@ public class ControladorUsuario {
             ServicioUsuario.registrarUsuario(usuarioNombre, usuarioEmail, password, password2, rolSeleccionado);
 
             modelo.put("exito", "Usuario registrado correctamente");// para enviar mensaje a la vista mediante un modelo llamado, con la referencia "exito"
-            return "index.html"; //retorna nuevamente vista inicio 
+            return "registro_usuario.html"; //retorna nuevamente vista inicio
 
         } catch (ExcepcionInformacionInvalida ex) {
             modelo.put("error", ex.getMessage());//mensaje de error enviado a la vista mediante un modelo, con la referencia "error".
             modelo.put("email", usuarioEmail);
-            return "registro.html";//retorna nuevamente vista inicio.
+            return "registro_usuario.html";//retorna nuevamente vista inicio.
         }
 
     }
@@ -58,6 +58,8 @@ public class ControladorUsuario {
 
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
+        boolean ocultarBoton = true;
+        modelo.addAttribute("ocultarBoton", ocultarBoton);
 
         if (error != null) {
             modelo.put("error", "Usuario o contraseña inválidos.");//envia un mensaje a la vista mediante un modelo, con la referencia "error" si la variable error contiene una excepción.
