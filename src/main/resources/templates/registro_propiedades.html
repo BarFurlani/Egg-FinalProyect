@@ -7,23 +7,23 @@
         <nav th:replace ="/fragments/navbar :: nav"> </nav>
     <div class="rectangulo2">
 <!--        cambiar metodo a post y poner la ruta -->
-        <form class="formulario" th:action="formulario.html" method="get" enctype="multipart/form-data" >
+        <form class="formulario" th:action="formulario.html" method="post" enctype="multipart/form-data" >
 
             <div class="form-group my-3">
                 <h3 class="card-title">REGISTRA TU PROPIEDAD</h3>
             </div>
             <div class="form-group my-3">
-                <input type="text" class="form-control" name="propiedadNombre" placeholder="NOMBRE DE LA PROPIEDAD" th:value="${propiedadNombre}" aria-label="Nombre">
+                <input type="text" class="form-control" name="propiedadNombre" placeholder="NOMBRE DE LA PROPIEDAD" th:value="${nombre}" aria-label="Nombre">
             </div>
             <div class="form-group my-3">
-                <input type="text" class="form-control" name="ciudad" placeholder="CIUDAD" th:value="${propiedadCiudad}" aria-label="Ciudad">
+                <input type="text" class="form-control" name="ciudad" placeholder="CIUDAD" th:value="${ciudad}" aria-label="Ciudad">
             </div>
 
             <div class="form-group my-3">
-                <input type="text" class="form-control" name="direccion" placeholder="DIRECCION" th:value="${propiedadDireccion}" aria-label="Direccion">
+                <input type="text" class="form-control" name="direccion" placeholder="DIRECCION" th:value="${direccion}" aria-label="Direccion">
             </div>
             <div class="form-group my-3">
-                <input type="text" class="form-control" name="precio" placeholder="PRECIO POR NOCHE" th:value="${precioNoche}" aria-label="Precio">
+                <input type="text" class="form-control" name="precio" placeholder="PRECIO POR NOCHE" th:value="${precioPorNoche}" aria-label="Precio">
             </div>
             <div class="form-group my-3">
                 <label for="descripcion">DESCRIPCION DEL PRODUCTO:</label>
@@ -42,7 +42,7 @@
 
             <button type="submit" class="btn btn-primary mt-3 botones">GUARDAR PROPIEDAD</button>
 
-        </form> 
+        </form>
     </div>
     <footer th:replace ="/fragments/footer :: footer"> </footer>
     </section >
