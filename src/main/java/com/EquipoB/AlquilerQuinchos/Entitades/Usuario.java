@@ -47,23 +47,6 @@ public class Usuario {
     public Usuario() {
     }
 
-//<<<<<<< HEAD
-    public Usuario(Long id, String username, String email, String password, boolean alta, boolean baja, RolUsuario rol, List<Propiedad> propiedades, Propiedad propiedadAlquilada) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-//        agregar telefono
-
-        this.alta = alta;
-        this.baja = baja;
-        this.rol = rol;
-        this.propiedades = propiedades;
-        this.propiedadAlquilada = propiedadAlquilada;
-    }
-
-//=======
-//>>>>>>> 100912c56915c8ee71faca72d8d06b8ec3f26cb1
     public Usuario(String username, String email, String password) {
         this.username = username;
         this.email = email;

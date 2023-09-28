@@ -62,16 +62,5 @@ public class ControladorImagen {
         return new ResponseEntity<>(imagenes, headers, HttpStatus.OK);
     }
 
-    @PostMapping("/subir")
-    public ResponseEntity<String> subirImagen(@RequestParam("archivo") MultipartFile archivo) {
-        try {
-            Imagen imagenGuardada = servicioImagen.guardarImagen(archivo);
-
-            return ResponseEntity.ok("Imagen subida con éxito. ID: " + imagenGuardada.getId());
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error al subir la imagen: " + e.getMessage());
-        }
-    }
-
 
 }

@@ -23,9 +23,11 @@ public class Imagen {
     private byte[] contenido;
 
     @OneToOne
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
     @ManyToOne
+    @JoinColumn(name = "propiedad_id")
     private Propiedad propiedad;
 
     public Imagen() {

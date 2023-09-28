@@ -25,14 +25,10 @@ public class Propiedad {
     @Enumerated(EnumType.STRING)
     private TipoDePropiedad tipoDePropiedad;
 
-    private String ubicacion;
+    private String ciudad;
+    private String direccion;
     private String descripcion;
     private Double precioPorNoche;
-    private Double tarifaDeLimpieza;
-    private Double tarifaPorServicio;
-    private Integer numeroDeBanos;
-    private Integer numeroDeCamas;
-    private String reglas;
 
     @ElementCollection
     @CollectionTable(name = "reviews_propiedad", joinColumns = @JoinColumn(name = "propiedad_id"))

@@ -37,7 +37,6 @@ public class ControladorUsuario {
     }
 
 
-
     @PostMapping("/registro")// post de formulario de registro de usuario, con los datos ingresados
     public String registro(@RequestParam String usuarioNombre, @RequestParam String usuarioEmail, @RequestParam String password, @RequestParam String password2,@RequestParam("Rol") String rolSeleccionado, ModelMap modelo) {
 
@@ -50,6 +49,7 @@ public class ControladorUsuario {
         } catch (ExcepcionInformacionInvalida ex) {
             modelo.put("error", ex.getMessage());//mensaje de error enviado a la vista mediante un modelo, con la referencia "error".
             modelo.put("email", usuarioEmail);
+
             return "registro_usuario.html";//retorna nuevamente vista inicio.
         }
 
@@ -66,8 +66,6 @@ public class ControladorUsuario {
         }
         return "login.html";//vista de formulario para inicio de sesion.
     }
-
-
 
 
 
@@ -92,7 +90,4 @@ public class ControladorUsuario {
         return "usuario.html";//vista de formulario para inicio de sesion.
     }
 
-
-
-//
 }

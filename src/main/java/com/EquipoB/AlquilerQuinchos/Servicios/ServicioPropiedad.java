@@ -6,6 +6,7 @@ import com.EquipoB.AlquilerQuinchos.Entitades.Usuario;
 import com.EquipoB.AlquilerQuinchos.Enumeraciones.TipoDePropiedad;
 import com.EquipoB.AlquilerQuinchos.Excepciones.ExcepcionInformacionInvalida;
 import com.EquipoB.AlquilerQuinchos.Excepciones.ExcepcionNoEncontrado;
+import com.EquipoB.AlquilerQuinchos.Repositorios.RepositorioImagen;
 import com.EquipoB.AlquilerQuinchos.Repositorios.RepositorioPropiedad;
 import com.EquipoB.AlquilerQuinchos.Repositorios.RepositorioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +25,15 @@ public class ServicioPropiedad {
 
     private final RepositorioPropiedad repositorioPropiedad;
     private final RepositorioUsuario repositorioUsuario;
+    private final RepositorioImagen repositorioImagen;
     private final ServicioUsuario servicioUsuario;
     private final ServicioImagen servicioImagen;
 
     @Autowired
-    public ServicioPropiedad(RepositorioPropiedad repositorioPropiedad, RepositorioUsuario repositorioUsuario, ServicioUsuario servicioUsuario, ServicioImagen servicioImagen) {
+    public ServicioPropiedad(RepositorioPropiedad repositorioPropiedad, RepositorioUsuario repositorioUsuario, RepositorioImagen repositorioImagen, ServicioUsuario servicioUsuario, ServicioImagen servicioImagen) {
         this.repositorioPropiedad = repositorioPropiedad;
         this.repositorioUsuario = repositorioUsuario;
+        this.repositorioImagen = repositorioImagen;
         this.servicioUsuario = servicioUsuario;
         this.servicioImagen = servicioImagen;
     }
@@ -38,17 +41,14 @@ public class ServicioPropiedad {
     //CREATE
 
     @Transactional
-    public Propiedad registrarPropiedad(Propiedad propiedad) {
+    public Propiedad registrarPropiedad(String nombre, String ciudad, String direccion, String descripcion, Double precioPorNoche) {
+        Propiedad propiedad = new Propiedad();
+        propiedad.setNombre(nombre);
+        propiedad.setCiudad(ciudad);
+        propiedad.setDireccion(direccion);
+        propiedad.setDescripcion(descripcion);
+        propiedad.setPrecioPorNoche(precioPorNoche);
         validacion(propiedad);
-
-        Optional<Usuario> propietarioExistente =repositorioUsuario.findById(propiedad.getPropietario().getId());
-        if (propietarioExistente.isPresent()) {
-            propiedad.setPropietario(propietarioExistente.get());
-        } else {
-            Usuario propietario = propiedad.getPropietario();
-            servicioUsuario.registrarUsuario(propietario);
-            propiedad.setPropietario(propietario);
-        }
         return repositorioPropiedad.save(propiedad);
     }
 
@@ -64,14 +64,6 @@ public class ServicioPropiedad {
 
     public Propiedad mostrarPropiedadPorNombre(String nombre) {
         return repositorioPropiedad.findByNombre(nombre).orElseThrow(() -> new ExcepcionNoEncontrado("No se pudo encontrar a la propiedad con nombre: " + nombre));
-    }
-
-    public List<Propiedad> mostrarPropiedadPorUbicacion(String ubicacion) {
-        List<Propiedad> propiedades = repositorioPropiedad.findByUbicacion(ubicacion);
-        if (propiedades.isEmpty()) {
-            throw new ExcepcionNoEncontrado("No se pudo encontrar alguna propiedad con ubicación en: " + ubicacion);
-        }
-        return propiedades;
     }
 
     public List<Propiedad> mostrarPropiedadPorTipo(TipoDePropiedad tipoDePropiedad) {
@@ -149,61 +141,19 @@ public class ServicioPropiedad {
         return repositorioPropiedad.save(propiedad);
     }
 
-    @Transactional
-    public void agregarImagen(Propiedad propiedad, MultipartFile archivo) throws IOException {
-        servicioImagen.validacion(archivo);
-        Imagen imagen = servicioImagen.guardarImagen(archivo);
-        propiedad.getImagenes().add(imagen);
-        repositorioPropiedad.save(propiedad);
-    }
-
-    public List<Imagen> mostrarImagenes(Propiedad propiedad) {
-        return propiedad.getImagenes();
-    }
-
-    @Transactional
-    public void eliminarImagen(Propiedad propiedad, Long imagen_id) {
-        Imagen imagen = propiedad.getImagenes().stream()
-                .filter(imagen1 -> imagen1.getId().equals(imagen_id))
-                .findFirst()
-                .orElseThrow(() -> new ExcepcionNoEncontrado("Imagen no encontrada"));
-
-        propiedad.getImagenes().remove(imagen);
-        servicioImagen.eliminarImagen(imagen_id);
-
-        repositorioPropiedad.save(propiedad);
-    }
 
     public void validacion(Propiedad propiedad) {
         if (propiedad.getNombre() == null || propiedad.getNombre().isEmpty()) {
             throw new ExcepcionInformacionInvalida("Nombre de propiedad requerido");
         }
-        if (propiedad.getUbicacion() == null || propiedad.getUbicacion().isEmpty()) {
-            throw new ExcepcionInformacionInvalida("Ubicación de propiedad requerida");
+        if (propiedad.getCiudad() == null || propiedad.getCiudad().isEmpty()) {
+            throw new ExcepcionInformacionInvalida("Ciudad donde está la propiedad requerida");
         }
-        if (propiedad.getPropietario() == null) {
-            throw new ExcepcionInformacionInvalida("Información del propietario requerida");
-        }
-        if (propiedad.getNumeroDeBanos() == null) {
-            throw new ExcepcionInformacionInvalida("Numero de baños requerido");
-        }
-        if (propiedad.getNumeroDeCamas() == null) {
-            throw new ExcepcionInformacionInvalida("Numero de camas requerido");
+        if (propiedad.getDireccion() == null || propiedad.getDireccion().isEmpty()) {
+            throw new ExcepcionInformacionInvalida("Dirección de la propiedad requerida");
         }
         if (propiedad.getPrecioPorNoche() == null) {
             throw new ExcepcionInformacionInvalida("Precio de alquiler por noche requerido");
-        }
-        if (propiedad.getTarifaDeLimpieza() == null) {
-            throw new ExcepcionInformacionInvalida("Tarifa de limpieza requerida");
-        }
-        if (propiedad.getTarifaPorServicio() == null) {
-            throw new ExcepcionInformacionInvalida("Tarifa por servicio de alquiler requerida");
-        }
-        if (propiedad.getServicios() == null || propiedad.getServicios().isEmpty()) {
-            throw new ExcepcionInformacionInvalida("Incluya al menos un servicio");
-        }
-        if (propiedad.getReglas() == null || propiedad.getReglas().isEmpty()) {
-            throw new ExcepcionInformacionInvalida("Incluya al menos una regla para la propiedad");
         }
         if (propiedad.getDescripcion() == null || propiedad.getDescripcion().isEmpty()) {
             throw new ExcepcionInformacionInvalida("Descripción del lugar requerida");

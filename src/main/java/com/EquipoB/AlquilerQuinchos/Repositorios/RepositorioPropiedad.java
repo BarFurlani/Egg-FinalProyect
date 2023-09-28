@@ -14,8 +14,6 @@ public interface RepositorioPropiedad extends JpaRepository<Propiedad, Long> {
 
     Optional<Propiedad> findByNombre(String nombre);
 
-    List<Propiedad> findByUbicacion(String ubicacion);
-
     List<Propiedad> findByTipoDePropiedad(TipoDePropiedad tipoDePropiedad);
 
     List<Propiedad> findByPropietario(Usuario propietario);

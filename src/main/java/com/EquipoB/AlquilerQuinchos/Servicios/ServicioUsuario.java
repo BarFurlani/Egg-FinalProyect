@@ -43,11 +43,10 @@ public class ServicioUsuario implements UserDetailsService {
         return repositorioUsuario.save(usuario);
     }
 
-
-
 //    version 2
 
     @Transactional
+
     public Usuario registrarUsuario2(String nombre,String email,String password,  String password2,
                                      String rolSeleccionado) {
         Usuario usuarioAux = new Usuario(nombre, email, password);
