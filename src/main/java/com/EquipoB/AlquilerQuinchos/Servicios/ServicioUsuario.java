@@ -43,26 +43,48 @@ public class ServicioUsuario implements UserDetailsService {
         return repositorioUsuario.save(usuario);
     }
 
+
+
+//    version 2
+
+    @Transactional
+    public Usuario registrarUsuario2(String nombre,String email,String password,  String password2,
+                                     String rolSeleccionado) {
+        Usuario usuarioAux = new Usuario(nombre, email, password);
+        validacionContrasena(usuarioAux,password,password2);
+        try {
+            usuarioAux.setPassword(new BCryptPasswordEncoder().encode(password));
+            //PARA ASIGNAR ROL SEGÚN LO QUE SE SELECCIONE EN LA VISTA
+            if ("PROPIETARIO".equalsIgnoreCase(rolSeleccionado)) {
+                usuarioAux.setRol(RolUsuario.ROL_PROPIETARIO);
+            }else{
+                usuarioAux.setRol(RolUsuario.ROL_INQUILINO);
+            }
+            validacion(usuarioAux);
+            return repositorioUsuario.save(usuarioAux);
+
+        } catch (DataIntegrityViolationException exception) {
+            throw new ExcepcionInformacionInvalida("Nombre de usuario o email no disponibles");
+        }
+    }
+
+//    cerar version 2
     @Transactional
     public Usuario registrarUsuario(String nombre,String email,String password,  String password2, String rolSeleccionado) {
 
+        Usuario usuarioAux = new Usuario(nombre, email, password);
+        validacionContrasena(usuarioAux,password,password2);
         try {
-            if (password.equals(password2)) {
-                Usuario usuarioAux = new Usuario(nombre, email, password);
-                usuarioAux.setPassword(new BCryptPasswordEncoder().encode(password));
-                
-                //PARA ASIGNAR ROL SEGÚN LO QUE SE SELECCIONE EN LA VISTA
-                if ("PROPIETARIO".equalsIgnoreCase(rolSeleccionado)) {
-                    usuarioAux.setRol(RolUsuario.ROL_PROPIETARIO);
-                }else{
-                    usuarioAux.setRol(RolUsuario.ROL_INQUILINO);
-                }
-                
-                validacion(usuarioAux);
-                return repositorioUsuario.save(usuarioAux);
-            } else {
-                throw new ExcepcionInformacionInvalida("los password deben ser iguales");
+            usuarioAux.setPassword(new BCryptPasswordEncoder().encode(password));
+            //PARA ASIGNAR ROL SEGÚN LO QUE SE SELECCIONE EN LA VISTA
+            if ("PROPIETARIO".equalsIgnoreCase(rolSeleccionado)) {
+                usuarioAux.setRol(RolUsuario.ROL_PROPIETARIO);
+            }else{
+                usuarioAux.setRol(RolUsuario.ROL_INQUILINO);
             }
+            validacion(usuarioAux);
+            return repositorioUsuario.save(usuarioAux);
+
         } catch (DataIntegrityViolationException exception) {
             throw new ExcepcionInformacionInvalida("Nombre de usuario o email no disponibles");
         }
@@ -149,6 +171,29 @@ public class ServicioUsuario implements UserDetailsService {
 
 
     public void validacion(Usuario usuario) {
+        if (usuario.getUsername() == null || usuario.getUsername().isEmpty()) {
+            throw new ExcepcionInformacionInvalida("Nombre de usuario requerido");
+        }
+        if (usuario.getEmail() == null || usuario.getEmail().isEmpty()) {
+            throw new ExcepcionInformacionInvalida("Dirección de email requerida");
+        }
+        if (usuario.getPassword() == null || usuario.getPassword().isEmpty()) {
+            throw new ExcepcionInformacionInvalida("Contraseña requerida");
+        }
+    }
+
+
+    public void validacionContrasena(Usuario usuario,String password, String passwoord2) {
+
+        if(!password.equals(passwoord2)){
+            throw new ExcepcionInformacionInvalida("las contrasenas deben ser iguales");
+        }
+
+        Usuario usuario2 = repositorioUsuario.buscarPorEmail(usuario.getEmail());
+        if (usuario2 != null) {
+            throw new ExcepcionInformacionInvalida("el email ya esta registrado");
+        }
+
         if (usuario.getUsername() == null || usuario.getUsername().isEmpty()) {
             throw new ExcepcionInformacionInvalida("Nombre de usuario requerido");
         }

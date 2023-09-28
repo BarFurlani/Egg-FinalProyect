@@ -29,6 +29,10 @@
                             </div>
                             <div class="form-group my-3">
                                 <input type="password" class="form-control" name="password" placeholder="Contraseña">
+
+                                <div class="login__mensaje-container" th:if="${param.error}">
+                                    <p class="login__mensaje-alerta">Usuario o Password Incorrectos</p>
+                                </div>
                                 <button type="submit" class="btn3">Ingresar</button>
                             </div>
                         </form>
