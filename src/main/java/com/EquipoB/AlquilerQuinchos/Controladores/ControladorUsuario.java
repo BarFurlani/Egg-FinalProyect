@@ -37,20 +37,20 @@ public class ControladorUsuario {
     }
 
 
-//    agregar parametro de rol
     @PostMapping("/registro")// post de formulario de registro de usuario, con los datos ingresados
-    public String registro(@RequestParam String usuarioNombre, @RequestParam String usuarioEmail, @RequestParam String password, @RequestParam String password2, ModelMap modelo) {
+    public String registro(@RequestParam String usuarioNombre, @RequestParam String usuarioEmail, @RequestParam String password, @RequestParam String password2,@RequestParam("Rol") String rolSeleccionado, ModelMap modelo) {
 
         try {
-            ServicioUsuario.registrarUsuario(usuarioNombre, usuarioEmail, password, password2);
+            ServicioUsuario.registrarUsuario(usuarioNombre, usuarioEmail, password, password2, rolSeleccionado);
 
             modelo.put("exito", "Usuario registrado correctamente");// para enviar mensaje a la vista mediante un modelo llamado, con la referencia "exito"
-            return "index.html"; //retorna nuevamente vista inicio 
+            return "registro_usuario.html"; //retorna nuevamente vista inicio
 
         } catch (ExcepcionInformacionInvalida ex) {
             modelo.put("error", ex.getMessage());//mensaje de error enviado a la vista mediante un modelo, con la referencia "error".
             modelo.put("email", usuarioEmail);
-            return "registro.html";//retorna nuevamente vista inicio.
+
+            return "registro_usuario.html";//retorna nuevamente vista inicio.
         }
 
     }
@@ -58,14 +58,14 @@ public class ControladorUsuario {
 
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, ModelMap modelo) {
+        boolean ocultarBoton = true;
+        modelo.addAttribute("ocultarBoton", ocultarBoton);
 
         if (error != null) {
             modelo.put("error", "Usuario o contraseña inválidos.");//envia un mensaje a la vista mediante un modelo, con la referencia "error" si la variable error contiene una excepción.
         }
         return "login.html";//vista de formulario para inicio de sesion.
     }
-
-
 
 
 
@@ -90,7 +90,4 @@ public class ControladorUsuario {
         return "usuario.html";//vista de formulario para inicio de sesion.
     }
 
-
-
-//
 }

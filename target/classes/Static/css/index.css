@@ -7,6 +7,10 @@
     font-family: Arial, sans-serif;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d0a4f937c1b122c7f19b23d3e8763fd1a2a60171
 .contenedor {
     display: flex;
     justify-content: space-between;
@@ -88,11 +92,21 @@
 }
 
 .reg {
+<<<<<<< HEAD
     
     height: 97px;
     flex-shrink: 0;
     border-radius: 30px;
     background: rgba(0, 0, 0, 0.78);
+=======
+    width: 100px;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.78);
+    color: #FFF;
+    margin-top: 50px;
+>>>>>>> d0a4f937c1b122c7f19b23d3e8763fd1a2a60171
 }
 
 .h2 {
@@ -105,16 +119,37 @@
     line-height: normal;
 }
 
+<<<<<<< HEAD
+=======
+.btn3 {
+    width: 100px;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.78);
+    color: #FFF;
+    margin-top: 50px;
+}
+
+>>>>>>> d0a4f937c1b122c7f19b23d3e8763fd1a2a60171
 /*Navbar*/
 
 .navbar {
     background-color: rgba(0, 0, 0, 0.5);
     align-items: center;
+<<<<<<< HEAD
     padding: 0 24px;
+=======
+    padding: 0 50px;
+>>>>>>> d0a4f937c1b122c7f19b23d3e8763fd1a2a60171
     justify-content: space-between;
     width: 100%;
     display: flex;
     height: 69px;
+<<<<<<< HEAD
+=======
+    margin-bottom: 50px;
+>>>>>>> d0a4f937c1b122c7f19b23d3e8763fd1a2a60171
 }
 
 .navbar p {
@@ -128,7 +163,13 @@
 
 form[name="buscar"]  {
     margin-right: auto;
+<<<<<<< HEAD
 }
+=======
+    color:#f3e1e1;
+}
+
+>>>>>>> d0a4f937c1b122c7f19b23d3e8763fd1a2a60171
 form[name="buscar"] input {
     width: 317px;
     height: 51px;
@@ -140,8 +181,11 @@ form[name="buscar"] input {
     font-size: 16px;
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> d0a4f937c1b122c7f19b23d3e8763fd1a2a60171
 .buscar {
     width: 317px;
     height: 51px;
@@ -154,7 +198,11 @@ form[name="buscar"] input {
     color: #FFF;
     text-align: center;
     font-family: Inria Sans;
+<<<<<<< HEAD
     font-size: 25px;
+=======
+    font-size: 20px;
+>>>>>>> d0a4f937c1b122c7f19b23d3e8763fd1a2a60171
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -165,8 +213,39 @@ form[name="buscar"] input {
     color: #FFF;
     text-align: center;
     font-family: Inria Sans;
+<<<<<<< HEAD
     font-size: 25px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
 }
+=======
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration: none;
+}
+
+/*Footer*/
+
+.footer {
+    background-color: rgba(0, 0, 0, 0.50);
+    align-items: center;
+    padding: 0 24px;
+    width: 100%;
+    display: flex;
+    height: 50px;
+    position: absolute;
+    bottom: 0;
+}
+
+
+
+.nombrefoot {
+    color: #000000;
+    text-align: center;
+    line-height: normal;
+    font-weight: 600;
+}
+>>>>>>> d0a4f937c1b122c7f19b23d3e8763fd1a2a60171

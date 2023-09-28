@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
+import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 
 @Entity
 @Getter @Setter @ToString @AllArgsConstructor
@@ -45,22 +46,6 @@ public class Usuario {
 
     public Usuario() {
     }
-
-
-    public Usuario(Long id, String username, String email, String password, boolean alta, boolean baja, RolUsuario rol, List<Propiedad> propiedades, Propiedad propiedadAlquilada) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-//        agregar telefono
-
-        this.alta = alta;
-        this.baja = baja;
-        this.rol = rol;
-        this.propiedades = propiedades;
-        this.propiedadAlquilada = propiedadAlquilada;
-    }
-
 
     public Usuario(String username, String email, String password) {
         this.username = username;

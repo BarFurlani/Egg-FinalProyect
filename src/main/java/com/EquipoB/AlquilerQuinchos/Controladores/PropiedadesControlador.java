@@ -19,14 +19,14 @@ import java.util.List;
 @RequestMapping("/propiedades")
 public class PropiedadesControlador {
 
-   private final ServicioPropiedad servicioPropiedad;
-   private final ServicioImagen servicioImagen;
+    private final ServicioPropiedad servicioPropiedad;
+    private final ServicioImagen servicioImagen;
 
-   @Autowired
+    @Autowired
     public PropiedadesControlador(ServicioPropiedad servicioPropiedad, ServicioImagen servicioImagen) {
         this.servicioPropiedad = servicioPropiedad;
-       this.servicioImagen = servicioImagen;
-   }
+        this.servicioImagen = servicioImagen;
+    }
 
     @GetMapping("/registrar")
     public String mostrarForm(Model model) {
@@ -93,5 +93,5 @@ public class PropiedadesControlador {
         return "propiedad.html";
     }
 
-
 }
+
