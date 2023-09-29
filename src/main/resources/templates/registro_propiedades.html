@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-     <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
@@ -9,19 +9,20 @@
 </head>
 
 <body>
- <nav th:replace="/fragments/navbar :: nav"></nav>    
-    <section class="registro" >
+<nav th:replace="/fragments/navbar :: nav"></nav>
+<section class="registro" >
 
-    
+
     <div class="rectangulo2">
-<!--        cambiar metodo a post y poner la ruta -->
+        <!--        cambiar metodo a post y poner la ruta -->
         <form class="formulario" th:action="formulario.html" method="get" enctype="multipart/form-data" >
+            <input type="number" name="idUsuario" th:value="${session.userSession.id}" hidden>
 
             <div class="form-group my-3">
                 <h3 class="card-title">REGISTRA TU PROPIEDAD</h3>
             </div>
             <div class="form-group my-3">
-                <input type="text" class="form-control" name="propiedadNombre" placeholder="NOMBRE DE LA PROPIEDAD" th:value="${propiedadNombre}" aria-label="Nombre">
+                <input type="text" class="form-control" name="nombre" placeholder="NOMBRE DE LA PROPIEDAD" th:value="${propiedadNombre}" aria-label="Nombre">
             </div>
             <div class="form-group my-3">
                 <input type="text" class="form-control" name="ciudad" placeholder="CIUDAD" th:value="${propiedadCiudad}" aria-label="Ciudad">
@@ -31,26 +32,25 @@
                 <input type="text" class="form-control" name="direccion" placeholder="DIRECCION" th:value="${propiedadDireccion}" aria-label="Direccion">
             </div>
             <div class="form-group my-3">
-                <input type="text" class="form-control" name="precio" placeholder="PRECIO POR NOCHE" th:value="${precioNoche}" aria-label="Precio">
+                <input type="text" class="form-control" name="precioPorNoche" placeholder="PRECIO POR NOCHE" th:value="${precioNoche}" aria-label="Precio">
             </div>
             <div class="form-group my-3">
                 <label for="descripcion">DESCRIPCION DEL PRODUCTO:</label>
-                <textarea class="form-control" name="descripcion" id="descripcion" placeholder="Escribe una descripción del producto: que incluye el alquiler del lugar. Ejemplo wifi, sistema de sonido, manteleria, vajilla, frezer, servicios (si es que brindan alguno)" rows="4" th:text="${descripcion}"></textarea>
+                <textarea class="form-control" name="descripcion" id="descripcion" placeholder="Escribe una descripciÃ³n del producto: que incluye el alquiler del lugar. Ejemplo wifi, sistema de sonido, manteleria, vajilla, frezer, servicios (si es que brindan alguno)" rows="4" th:text="${descripcion}"></textarea>
             </div>
             <div class="form-group my-3">
                 <label for="imagenes">SUBIR IMAGENES:</label>
-                <input type="file" name="imagenes[]" id="imagenes" multiple accept="image/*">
+                <input type="file" name="archivos" id="imagenes" multiple accept="image/*">
             </div>
 
-          <button type="submit" class="btn btn-dark mt-3 botones">GUARDAR PROPIEDAD</button>
-          <a th:href="@{/usuario/perfil}"><button type="submit" class="btn btn-dark mt-3 botones">CANCELAR</button></a>
+            <a th:href="@{/propiedades/lista}"><button class="btn btn-dark mt-3 botones">GUARDAR PROPIEDAD</button></a>
+            <a th:href="@{/usuario/perfil}"><button class="btn btn-dark mt-3 botones">CANCELAR</button></a>
 
 
-        </form> 
+        </form>
     </div>
-   
-    </section >
-     <footer th:replace ="/fragments/footer :: footer"> </footer>
+
+</section >
+<footer th:replace ="/fragments/footer :: footer"> </footer>
 </body>
 </html>
-

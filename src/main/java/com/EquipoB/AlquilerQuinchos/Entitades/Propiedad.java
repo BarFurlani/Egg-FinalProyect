@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Entity
-@Getter @Setter @ToString @AllArgsConstructor
+@Getter @Setter @ToString
 public class Propiedad {
 
     @Id
@@ -36,7 +36,7 @@ public class Propiedad {
     private List<Review> review;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "propiedad", fetch = FetchType.LAZY)
-    private List<Imagen> imagenes;
+    private List<ImagenPropiedad> imagenes;
 
     @ElementCollection
     @CollectionTable(name = "servicios_propiedad", joinColumns = @JoinColumn(name = "propiedad_id"))
