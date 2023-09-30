@@ -22,8 +22,13 @@ import java.util.List;
 @RequestMapping("/propiedades")
 public class PropiedadesControlador {
 
+    @Autowired
     private final ServicioPropiedad servicioPropiedad;
+
+    @Autowired
     private final ServicioImagenPropiedad servicioImagen;
+
+    @Autowired
     private final ServicioUsuario servicioUsuario;
 
     @Autowired
@@ -62,10 +67,7 @@ public class PropiedadesControlador {
             @RequestParam String descripcion,
             @RequestParam MultipartFile[] archivos) {
         try {
-
-            Propiedad propiedad = new Propiedad();
-
-            propiedad = servicioPropiedad.registrarPropiedad(servicioUsuario.traerUsuarioPorId(idUsuario), nombre, ciudad, direccion, descripcion, precioPorNoche, Arrays.asList(archivos));
+             servicioPropiedad.registrarPropiedad(servicioUsuario.traerUsuarioPorId(idUsuario), nombre, ciudad, direccion, descripcion, precioPorNoche, Arrays.asList(archivos));
 
         } catch (IOException e) {
             e.getMessage();

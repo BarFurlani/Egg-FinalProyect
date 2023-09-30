@@ -25,33 +25,34 @@
                 <a th:href="@{/logout}"> <button type="button" class="btn btn-outline-light me-2" th:if="${session.usuariosession != null}"  role="button" aria-expanded="false"> Logout </button></a>
             </div>
         </nav>
+<!--fin navbar-->
 
-        <!--        menu solo para esta vista-->
 
-        <main class="card-container">
-            <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="5000">
-<!--                <div class="carousel-inner">-->
-<!--                    <div th:each="propiedad, iterStat : ${propiedades}" class="carousel-item" th:classappend="${iterStat.index == 0} ? active">-->
-<!--                        <img th:src="${propiedad.archivos}" class="d-block w-100" alt="...">-->
-<!--                    </div>-->
-<!--                </div>-->
+
+        <h1 class="dashboard__titulo">Bienvenido Admin</h1>
+
+        <section class="metodos">
+
+            <div class="metodos-card__container">
+                <h3 class="metodos-card__titulo">Primer Metodo</h3>
+                <img class="metodos-card__imagenes" src="" alt="">
+                <a th:href="@{/dashboard/listar_usuarios}" class="metodos-card__button" href="">Accion</a>
+
             </div>
-<!--Thymeleaf iterara sobre la lista ${propiedades} y generar dinámicamente las tarjetas de propiedades y las imágenes en el carrusel-->
-            <div class="card" th:each="propiedad : ${propiedades}">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${propiedad.nombre}"></h5>
-                    <p class="card-text" th:text="${propiedad.descripcion}"></p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item" th:text="${propiedad.ciudad}"></li>
-                    <li class="list-group-item" th:text="${propiedad.direccion}"></li>
-                    <li class="list-group-item" th:text="${propiedad.precioPorNoche}"></li>
-                </ul>
-                <div class="card-body">
-                    <button class="btn-see">VER</button>
-                    <button class="btn-fav"><i class='bx bx-heart-circle'></i></button>
-                </div>
-            </div>
+
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
         </main>
         <footer th:replace="/fragments/footer :: footer"></footer>
     </section>

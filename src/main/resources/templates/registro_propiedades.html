@@ -17,6 +17,9 @@
         <!--        cambiar metodo a post y poner la ruta -->
         <form class="formulario" th:action="@{/propiedades/registrar}" method="post" enctype="multipart/form-data" th:object="${propiedad}">
 
+<!--            captar id-->
+            <input type="hidden" class="form-control" name="idUsuario" placeholder="NOMBRE DE LA PROPIEDAD" th:value="${session.usuariosession.id}" aria-label="Nombre">
+
             <div class="form-group my-3">
                 <h3 class="card-title">REGISTRA TU PROPIEDAD</h3>
             </div>

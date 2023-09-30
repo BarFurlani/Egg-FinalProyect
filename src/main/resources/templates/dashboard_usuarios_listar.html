@@ -25,33 +25,45 @@
                 <a th:href="@{/logout}"> <button type="button" class="btn btn-outline-light me-2" th:if="${session.usuariosession != null}"  role="button" aria-expanded="false"> Logout </button></a>
             </div>
         </nav>
+<!--fin navbar-->
 
-        <!--        menu solo para esta vista-->
 
-        <main class="card-container">
-            <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="5000">
-<!--                <div class="carousel-inner">-->
-<!--                    <div th:each="propiedad, iterStat : ${propiedades}" class="carousel-item" th:classappend="${iterStat.index == 0} ? active">-->
-<!--                        <img th:src="${propiedad.archivos}" class="d-block w-100" alt="...">-->
-<!--                    </div>-->
-<!--                </div>-->
-            </div>
-<!--Thymeleaf iterara sobre la lista ${propiedades} y generar dinámicamente las tarjetas de propiedades y las imágenes en el carrusel-->
-            <div class="card" th:each="propiedad : ${propiedades}">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="${propiedad.nombre}"></h5>
-                    <p class="card-text" th:text="${propiedad.descripcion}"></p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item" th:text="${propiedad.ciudad}"></li>
-                    <li class="list-group-item" th:text="${propiedad.direccion}"></li>
-                    <li class="list-group-item" th:text="${propiedad.precioPorNoche}"></li>
-                </ul>
-                <div class="card-body">
-                    <button class="btn-see">VER</button>
-                    <button class="btn-fav"><i class='bx bx-heart-circle'></i></button>
-                </div>
-            </div>
+
+
+
+        <section class="metodos">
+
+
+        </section>
+
+
+
+<!--                <tbody th:each="usuario: ${lista_usuarios}">-->
+<!--                <tr>-->
+
+<!--                    <th scope="row" th:text="${usuario.id}"></th>-->
+<!--                    <td th:text="${usuario.nombre}"></td>-->
+<!--                    <td th:text="${usuario.email}"></td>-->
+<!--                    <td sec:authorize="hasRole('ADMIN')">-->
+<!--                        &lt;!&ndash;                                 para el quiera saber esto tambien funciona&ndash;&gt;-->
+<!--                        &lt;!&ndash;                                <a class="btn btn-primary" th:href="@{/noticia/modificar/__${noticia.id}__}">modificar a</a>&ndash;&gt;-->
+<!--                        <a th:href="@{}"> <button class="btn btn-primary"> DarBaja</button></a>-->
+
+<!--                    </td>-->
+<!--                    <td>-->
+<!--                        <a th:href="@{}"> <button class="btn btn-primary"> DarAlta</button></a>-->
+<!--                    </td>-->
+
+                </tr>
+                </tbody>
+
+
+
+
+
+
+
+
         </main>
         <footer th:replace="/fragments/footer :: footer"></footer>
     </section>
