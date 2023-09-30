@@ -103,8 +103,10 @@ public class ControladorUsuario {
     }
 
     @GetMapping("/perfil")
-    public String perfil(@RequestParam(required = false) String error, ModelMap modelo) {
-
+    public String perfil(@RequestParam(required = false) String error,HttpSession session, ModelMap modelo) {
+        Usuario usuario = (Usuario) session.getAttribute("usuariosession");
+        System.out.println(usuario.getUsername());
+        modelo.put("usuario", servicioUsuario.traerUsuarioPorId(usuario.getId()));
         if (error != null) {
             modelo.put("error", "Usuario o contraseña inválidos.");//envia un mensaje a la vista mediante un modelo, con la referencia "error" si la variable error contiene una excepción.
         }
