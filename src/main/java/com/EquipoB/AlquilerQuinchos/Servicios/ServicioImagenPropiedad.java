@@ -4,7 +4,7 @@ import com.EquipoB.AlquilerQuinchos.Entitades.ImagenPropiedad;
 import com.EquipoB.AlquilerQuinchos.Entitades.Propiedad;
 import com.EquipoB.AlquilerQuinchos.Excepciones.ExcepcionInformacionInvalida;
 import com.EquipoB.AlquilerQuinchos.Excepciones.ExcepcionNoEncontrado;
-import com.EquipoB.AlquilerQuinchos.Repositorios.RepositorioImagen;
+import com.EquipoB.AlquilerQuinchos.Repositorios.RepositorioImagenPropiedad;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,10 +17,10 @@ import java.util.List;
 public class ServicioImagenPropiedad {
 
 
-    private final RepositorioImagen repositorioImagen;
+    private final RepositorioImagenPropiedad repositorioImagen;
 
     @Autowired
-    public ServicioImagenPropiedad(RepositorioImagen repositorioImagen) {
+    public ServicioImagenPropiedad(RepositorioImagenPropiedad repositorioImagen) {
         this.repositorioImagen = repositorioImagen;
     }
 

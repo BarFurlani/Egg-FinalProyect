@@ -1,19 +1,21 @@
 package com.EquipoB.AlquilerQuinchos.Controladores;
 
-import com.EquipoB.AlquilerQuinchos.Entitades.ImagenPropiedad;
 import com.EquipoB.AlquilerQuinchos.Entitades.Propiedad;
+import com.EquipoB.AlquilerQuinchos.Entitades.Usuario;
 import com.EquipoB.AlquilerQuinchos.Servicios.ServicioImagenPropiedad;
 import com.EquipoB.AlquilerQuinchos.Servicios.ServicioPropiedad;
+import com.EquipoB.AlquilerQuinchos.Servicios.ServicioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -22,14 +24,16 @@ public class PropiedadesControlador {
 
     private final ServicioPropiedad servicioPropiedad;
     private final ServicioImagenPropiedad servicioImagen;
+    private final ServicioUsuario servicioUsuario;
 
     @Autowired
-    public PropiedadesControlador(ServicioPropiedad servicioPropiedad, ServicioImagenPropiedad servicioImagen) {
+    public PropiedadesControlador(ServicioPropiedad servicioPropiedad, ServicioImagenPropiedad servicioImagen, ServicioUsuario servicioUsuario) {
         this.servicioPropiedad = servicioPropiedad;
         this.servicioImagen = servicioImagen;
+        this.servicioUsuario = servicioUsuario;
     }
 
-    @PreAuthorize("hasAnyRole('ROL_PROPIETARIO', 'ROL_ADMINISTRADOR')")
+    @PreAuthorize("permitAll()")
     @GetMapping("/formulario")
     public String mostrarForm(Model model) {
         Propiedad propiedad = new Propiedad();
@@ -43,6 +47,29 @@ public class PropiedadesControlador {
         List<Propiedad> propiedades = servicioPropiedad.mostrarTodasLasPropiedades();
 
         model.addAttribute("propiedades", propiedades);
+
+        return "propiedades.html";
+    }
+
+    @PreAuthorize("permitAll()")
+    @PostMapping("/registrar")
+    public String registrarPropiedad(
+            @RequestParam Long idUsuario,
+            @RequestParam String nombre,
+            @RequestParam String ciudad,
+            @RequestParam String direccion,
+            @RequestParam Double precioPorNoche,
+            @RequestParam String descripcion,
+            @RequestParam MultipartFile[] archivos) {
+        try {
+
+            Propiedad propiedad = new Propiedad();
+
+            propiedad = servicioPropiedad.registrarPropiedad(servicioUsuario.traerUsuarioPorId(idUsuario), nombre, ciudad, direccion, descripcion, precioPorNoche, Arrays.asList(archivos));
+
+        } catch (IOException e) {
+            e.getMessage();
+        }
 
         return "propiedades.html";
     }

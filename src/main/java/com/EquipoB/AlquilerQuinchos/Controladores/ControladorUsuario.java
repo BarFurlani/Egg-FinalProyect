@@ -15,6 +15,8 @@ import com.EquipoB.AlquilerQuinchos.Servicios.ServicioPropiedad;
 import com.EquipoB.AlquilerQuinchos.Servicios.ServicioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -108,6 +111,7 @@ public class ControladorUsuario {
         return "usuario.html";//vista de formulario para inicio de sesion.
     }
 
+    @PreAuthorize("permitAll()")
     @PostMapping("/registrarPropiedades")
     public String registrarPropiedad(
             @RequestParam Long idUsuario,
@@ -116,20 +120,18 @@ public class ControladorUsuario {
             @RequestParam String direccion,
             @RequestParam Double precioPorNoche,
             @RequestParam String descripcion,
-            @RequestParam MultipartFile[] archivos,
-            RedirectAttributes redirectAttributes) {
+            @RequestParam MultipartFile[] archivos) {
         try {
+
             Propiedad propiedad = new Propiedad();
 
             propiedad = servicioPropiedad.registrarPropiedad(servicioUsuario.traerUsuarioPorId(idUsuario), nombre, ciudad, direccion, descripcion, precioPorNoche, Arrays.asList(archivos));
 
-            redirectAttributes.addFlashAttribute("mensajeDeExito", "Propiedad registrada correctamente");
-
         } catch (IOException e) {
-            redirectAttributes.addFlashAttribute("mensajeDeError", "Error al subir imágenes de propiedad");
+            e.getMessage();
         }
 
-        return "redirect:/usuario/propiedades" + idUsuario;
+        return "propiedades.html";
     }
 
 }

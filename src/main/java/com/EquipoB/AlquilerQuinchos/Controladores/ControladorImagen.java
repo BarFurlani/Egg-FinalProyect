@@ -44,7 +44,7 @@ public class ControladorImagen {
         return new ResponseEntity<>(imagen, headers, HttpStatus.OK);
     }
 
-    @GetMapping("/publicacion/{id}")
+    @GetMapping("/propiedades/{id}")
     public ResponseEntity<List<byte[]>> imagenPropiedad(@PathVariable Long id) {
         Propiedad propiedad = servicioPropiedad.mostrarPropiedadPorId(id);
 
