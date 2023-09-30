@@ -1,0 +1,214 @@
+.usuarios {
+    background-image: url("../img/usuario_vista.jpg");
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100vh;
+    display: flex; /* Agrega flex para que los elementos se coloquen en fila */
+    font-family: Arial, sans-serif;
+    align-items: center;
+    justify-content: space-between;
+}
+.hola {
+    color: white;
+}
+/* Establece flex-grow para que los elementos se expandan */
+.contenedor {
+    flex-grow: 1;
+    width: 400px;
+    height: 500px;
+    background: rgba(217, 217, 217, 0.60);
+    text-align: center;
+    border-radius: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-top: 20px;
+}
+
+.rectangulo2 {
+    flex-grow: 1;
+    width: 400px;
+    height: 500px;
+    background: rgba(217, 217, 217, 0.60);
+    text-align: center;
+    border-radius: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-top: 20px;
+    margin-left: 20px; /* Agrega un margen izquierdo para separar los contenedores */
+}
+
+/* Estilo para el cuerpo (body) y el encabezado (header) */
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #000;
+    padding: 0 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 69px;
+}
+
+/* Estilos para el contenido principal (main) */
+main.usuarios {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+.cuadrado {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+    margin-bottom: -20px; /* Elimina el espacio adicional en la parte inferior */
+}
+/* Establece márgenes y rellenos a cero en los elementos padre */
+.col-6 {
+    margin: 0;
+    padding: 0;
+}
+img {
+    display: block; /* Asegura que la imagen sea un bloque */
+    margin: 0 auto; /* Centrar horizontalmente */
+}
+.c1,
+.c2,
+.c3,
+.c4 {
+    flex: 0 1 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+    height: 200px;
+    background: rgba(217, 217, 217, 0.60);
+    text-align: center;
+    border-radius: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+}
+
+
+
+/* Estilos para los contenedores */
+.contenedor,
+.rectangulo2 {
+    flex: 0 1 calc(50% - 20px); /* Cada contenedor ocupa la mitad menos el espacio entre ellos */
+    max-width: calc(50% - 20px); /* Ajusta el tamaño máximo de cada contenedor */
+    height: 500px;
+    background: rgba(217, 217, 217, 0.60);
+    text-align: center;
+    border-radius: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-bottom: 20px; /* Espacio entre los contenedores */
+}
+
+/* Estilo para el pie de página (footer) */
+footer {
+    background-color: #000 !important;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    color: #fff !important;
+    font-weight: 600;
+}
+
+/* Estilo para los otros elementos que puedas tener en el footer */
+
+.navbar {
+    background-color: #000; /* Cambiar a negro */
+    align-items: center;
+    padding: 0 50px;
+    justify-content: space-between;
+    width: 100%;
+    display: flex;
+    height: 69px;
+
+}
+
+.navbar p {
+    color: #fff; /* Cambiar a blanco */
+    margin: 0;
+    padding: 0 10px;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: center;
+}
+
+
+form[name="buscar"]  {
+    margin-right: auto;
+    color:#f3e1e1;
+}
+
+form[name="buscar"] input {
+    width: 317px;
+    height: 51px;
+    border-radius: 30px;
+    background: rgba(217, 217, 217, 0.10);
+    border: none;
+    padding: 0 20px;
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+}
+
+.buscar {
+    width: 317px;
+    height: 51px;
+    flex-shrink: 0;
+    border-radius: 30px;
+    background: rgba(217, 217, 217, 0.10);
+}
+
+.inicio {
+    color: #FFF;
+    text-align: center;
+    font-family: Inria Sans;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration: none;
+}
+
+.productos {
+    color: #FFF;
+    text-align: center;
+    font-family: Inria Sans;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration: none;
+}
+
+/*Footer*/
+
+.footer {
+    background-color: #000 !important; /* Cambiar a negro con !important */
+    align-items: center;
+    padding: 0 24px;
+    width: 100%;
+    display: flex;
+    height: 50px;
+}
+
+.nombrefoot {
+    color: #fff !important; /* Cambiar a blanco con !important */
+    text-align: center;
+    line-height: normal;
+    font-weight: 600;
+}

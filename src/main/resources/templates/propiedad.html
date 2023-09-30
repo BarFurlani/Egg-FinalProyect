@@ -9,14 +9,7 @@
         <nav th:replace="/fragments/navbar :: nav"></nav>
 
         <main class="card-container">
-            <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="5000">
-                <div class="carousel-inner">
-                    <div th:each="propiedad, iterStat : ${propiedades}" class="carousel-item" th:classappend="${iterStat.index == 0} ? active">
-                        <img th:src="${propiedad.imagen}" class="d-block w-100" alt="...">
-                    </div>
-                </div>
-            </div>
-            <div>
+          
                 <h5 th:text="${propiedad.propiedadNombre}"></h5>
                 <p th:text="${propiedad.descripcion}"></p>
                 <ul class="list-group list-group-flush">

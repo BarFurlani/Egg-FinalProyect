@@ -67,7 +67,8 @@ public class PropiedadesControlador {
             @RequestParam String descripcion,
             @RequestParam MultipartFile[] archivos) {
         try {
-             servicioPropiedad.registrarPropiedad(servicioUsuario.traerUsuarioPorId(idUsuario), nombre, ciudad, direccion, descripcion, precioPorNoche, Arrays.asList(archivos));
+            servicioPropiedad.registrarPropiedad(servicioUsuario.traerUsuarioPorId(idUsuario), nombre, ciudad, direccion, descripcion, precioPorNoche, Arrays.asList(archivos));
+            return "propiedades.html";
 
         } catch (IOException e) {
             e.getMessage();
@@ -87,4 +88,3 @@ public class PropiedadesControlador {
     }
 
 }
-
