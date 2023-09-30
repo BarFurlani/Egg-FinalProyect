@@ -1,12 +1,11 @@
 package com.EquipoB.AlquilerQuinchos.Servicios;
 
-import com.EquipoB.AlquilerQuinchos.Entitades.Imagen;
 import com.EquipoB.AlquilerQuinchos.Entitades.Propiedad;
 import com.EquipoB.AlquilerQuinchos.Entitades.Usuario;
 import com.EquipoB.AlquilerQuinchos.Enumeraciones.TipoDePropiedad;
 import com.EquipoB.AlquilerQuinchos.Excepciones.ExcepcionInformacionInvalida;
 import com.EquipoB.AlquilerQuinchos.Excepciones.ExcepcionNoEncontrado;
-import com.EquipoB.AlquilerQuinchos.Repositorios.RepositorioImagen;
+import com.EquipoB.AlquilerQuinchos.Repositorios.RepositorioImagenPropiedad;
 import com.EquipoB.AlquilerQuinchos.Repositorios.RepositorioPropiedad;
 import com.EquipoB.AlquilerQuinchos.Repositorios.RepositorioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +24,12 @@ public class ServicioPropiedad {
 
     private final RepositorioPropiedad repositorioPropiedad;
     private final RepositorioUsuario repositorioUsuario;
-    private final RepositorioImagen repositorioImagen;
+    private final RepositorioImagenPropiedad repositorioImagen;
     private final ServicioUsuario servicioUsuario;
-    private final ServicioImagen servicioImagen;
+    private final ServicioImagenPropiedad servicioImagen;
 
     @Autowired
-    public ServicioPropiedad(RepositorioPropiedad repositorioPropiedad, RepositorioUsuario repositorioUsuario, RepositorioImagen repositorioImagen, ServicioUsuario servicioUsuario, ServicioImagen servicioImagen) {
+    public ServicioPropiedad(RepositorioPropiedad repositorioPropiedad, RepositorioUsuario repositorioUsuario, RepositorioImagenPropiedad repositorioImagen, ServicioUsuario servicioUsuario, ServicioImagenPropiedad servicioImagen) {
         this.repositorioPropiedad = repositorioPropiedad;
         this.repositorioUsuario = repositorioUsuario;
         this.repositorioImagen = repositorioImagen;
@@ -41,15 +40,20 @@ public class ServicioPropiedad {
     //CREATE
 
     @Transactional
-    public Propiedad registrarPropiedad(String nombre, String ciudad, String direccion, String descripcion, Double precioPorNoche) {
+    public Propiedad registrarPropiedad(Usuario propietario, String nombre, String ciudad, String direccion, String descripcion, Double precioPorNoche, List<MultipartFile> imagenes) throws IOException {
         Propiedad propiedad = new Propiedad();
+        propiedad.setPropietario(propietario);
         propiedad.setNombre(nombre);
         propiedad.setCiudad(ciudad);
         propiedad.setDireccion(direccion);
         propiedad.setDescripcion(descripcion);
         propiedad.setPrecioPorNoche(precioPorNoche);
         validacion(propiedad);
-        return repositorioPropiedad.save(propiedad);
+        repositorioPropiedad.save(propiedad);
+        for (MultipartFile imagen : imagenes) {
+            servicioImagen.guardarImagen(imagen, propiedad);
+        }
+        return propiedad;
     }
 
     //READ

@@ -8,8 +8,8 @@ import lombok.ToString;
 import javax.persistence.*;
 
 @Entity
-@Getter @Setter @ToString @AllArgsConstructor
-public class Imagen {
+@Getter @Setter @ToString
+public class ImagenUsuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,11 +26,7 @@ public class Imagen {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    @ManyToOne
-    @JoinColumn(name = "propiedad_id")
-    private Propiedad propiedad;
-
-    public Imagen() {
+    public ImagenUsuario() {
     }
 }
 
