@@ -1,18 +1,21 @@
 package com.EquipoB.AlquilerQuinchos.Controladores;
 
-import com.EquipoB.AlquilerQuinchos.Entitades.Imagen;
 import com.EquipoB.AlquilerQuinchos.Entitades.Propiedad;
-import com.EquipoB.AlquilerQuinchos.Servicios.ServicioImagen;
+import com.EquipoB.AlquilerQuinchos.Entitades.Usuario;
+import com.EquipoB.AlquilerQuinchos.Servicios.ServicioImagenPropiedad;
 import com.EquipoB.AlquilerQuinchos.Servicios.ServicioPropiedad;
+import com.EquipoB.AlquilerQuinchos.Servicios.ServicioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -20,58 +23,23 @@ import java.util.List;
 public class PropiedadesControlador {
 
     private final ServicioPropiedad servicioPropiedad;
-    private final ServicioImagen servicioImagen;
+    private final ServicioImagenPropiedad servicioImagen;
+    private final ServicioUsuario servicioUsuario;
 
     @Autowired
-    public PropiedadesControlador(ServicioPropiedad servicioPropiedad, ServicioImagen servicioImagen) {
+    public PropiedadesControlador(ServicioPropiedad servicioPropiedad, ServicioImagenPropiedad servicioImagen, ServicioUsuario servicioUsuario) {
         this.servicioPropiedad = servicioPropiedad;
         this.servicioImagen = servicioImagen;
+        this.servicioUsuario = servicioUsuario;
     }
 
-    @GetMapping("/registrar")
+    @PreAuthorize("permitAll()")
+    @GetMapping("/formulario")
     public String mostrarForm(Model model) {
         Propiedad propiedad = new Propiedad();
         model.addAttribute("propiedad", propiedad);
 
         return "registro_propiedades.html";
-    }
-
-    @PostMapping("/registro")
-    public String registrarPropiedad(
-            @RequestParam String nombre,
-            @RequestParam String ciudad,
-            @RequestParam String direccion,
-            @RequestParam Double precioPorNoche,
-            @RequestParam String descripcion,
-            @RequestParam(required = false) MultipartFile[] archivos,
-            RedirectAttributes redirectAttributes) {
-        try {
-            Propiedad propiedad = new Propiedad();
-            propiedad.setNombre(nombre);
-            propiedad.setCiudad(ciudad);
-            propiedad.setDireccion(direccion);
-            propiedad.setPrecioPorNoche(precioPorNoche);
-            propiedad.setDescripcion(descripcion);
-
-            propiedad = servicioPropiedad.registrarPropiedad(nombre, ciudad, direccion, descripcion, precioPorNoche);
-
-            List<Imagen> listaImagen = new ArrayList<>();
-            for (MultipartFile archivo : archivos) {
-                Imagen imagen = servicioImagen.guardarImagen(archivo);
-                imagen.setPropiedad(propiedad);
-                listaImagen.add(imagen);
-            }
-            propiedad.setImagenes(listaImagen);
-
-            servicioPropiedad.actualizarPropiedad(propiedad.getId(), propiedad);
-
-            redirectAttributes.addFlashAttribute("mensajeDeExito", "Propiedad registrada correctamente");
-
-        } catch (IOException e) {
-            redirectAttributes.addFlashAttribute("mensajeDeError", "Error al subir imágenes de propiedad");
-        }
-
-        return "redirect:/propiedades/registrar";
     }
 
     @GetMapping("/lista")
@@ -83,7 +51,30 @@ public class PropiedadesControlador {
         return "propiedades.html";
     }
 
-    @GetMapping("/vista/{id}")
+    @PreAuthorize("permitAll()")
+    @PostMapping("/registrar")
+    public String registrarPropiedad(
+            @RequestParam Long idUsuario,
+            @RequestParam String nombre,
+            @RequestParam String ciudad,
+            @RequestParam String direccion,
+            @RequestParam Double precioPorNoche,
+            @RequestParam String descripcion,
+            @RequestParam MultipartFile[] archivos) {
+        try {
+
+            Propiedad propiedad = new Propiedad();
+
+            propiedad = servicioPropiedad.registrarPropiedad(servicioUsuario.traerUsuarioPorId(idUsuario), nombre, ciudad, direccion, descripcion, precioPorNoche, Arrays.asList(archivos));
+
+        } catch (IOException e) {
+            e.getMessage();
+        }
+
+        return "propiedades.html";
+    }
+
+    @GetMapping("/lista/{id}")
     public String viewProperty(@PathVariable Long id, Model model) {
 
         Propiedad propiedad = servicioPropiedad.mostrarPropiedadPorId(id);

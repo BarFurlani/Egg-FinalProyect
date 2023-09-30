@@ -6,19 +6,32 @@
  */
 package com.EquipoB.AlquilerQuinchos.Controladores;
 
+import com.EquipoB.AlquilerQuinchos.Entitades.ImagenPropiedad;
+import com.EquipoB.AlquilerQuinchos.Entitades.Propiedad;
 import com.EquipoB.AlquilerQuinchos.Entitades.Usuario;
 import com.EquipoB.AlquilerQuinchos.Excepciones.ExcepcionInformacionInvalida;
+import com.EquipoB.AlquilerQuinchos.Servicios.ServicioImagenPropiedad;
+import com.EquipoB.AlquilerQuinchos.Servicios.ServicioPropiedad;
 import com.EquipoB.AlquilerQuinchos.Servicios.ServicioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -27,10 +40,18 @@ import javax.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/usuario")
 public class ControladorUsuario {
-    
+
+    private final ServicioPropiedad servicioPropiedad;
+    private final ServicioImagenPropiedad servicioImagenPropiedad;
+    private final ServicioUsuario servicioUsuario;
+
     @Autowired
-    private ServicioUsuario ServicioUsuario;
-         
+    public ControladorUsuario(ServicioPropiedad servicioPropiedad, ServicioImagenPropiedad servicioImagenPropiedad, ServicioUsuario servicioUsuario) {
+        this.servicioPropiedad = servicioPropiedad;
+        this.servicioImagenPropiedad = servicioImagenPropiedad;
+        this.servicioUsuario = servicioUsuario;
+    }
+
     @GetMapping("/registrar")
     public String registrar() {
         return "registro_usuario.html"; // formulario de registro de usuario
@@ -41,7 +62,7 @@ public class ControladorUsuario {
     public String registro(@RequestParam String usuarioNombre, @RequestParam String usuarioEmail, @RequestParam String password, @RequestParam String password2,@RequestParam("Rol") String rolSeleccionado, ModelMap modelo) {
 
         try {
-            ServicioUsuario.registrarUsuario(usuarioNombre, usuarioEmail, password, password2, rolSeleccionado);
+            servicioUsuario.registrarUsuario(usuarioNombre, usuarioEmail, password, password2, rolSeleccionado);
 
             modelo.put("exito", "Usuario registrado correctamente");// para enviar mensaje a la vista mediante un modelo llamado, con la referencia "exito"
             return "registro_usuario.html"; //retorna nuevamente vista inicio
@@ -88,6 +109,29 @@ public class ControladorUsuario {
             modelo.put("error", "Usuario o contraseña inválidos.");//envia un mensaje a la vista mediante un modelo, con la referencia "error" si la variable error contiene una excepción.
         }
         return "usuario.html";//vista de formulario para inicio de sesion.
+    }
+
+    @PreAuthorize("permitAll()")
+    @PostMapping("/registrarPropiedades")
+    public String registrarPropiedad(
+            @RequestParam Long idUsuario,
+            @RequestParam String nombre,
+            @RequestParam String ciudad,
+            @RequestParam String direccion,
+            @RequestParam Double precioPorNoche,
+            @RequestParam String descripcion,
+            @RequestParam MultipartFile[] archivos) {
+        try {
+
+            Propiedad propiedad = new Propiedad();
+
+            propiedad = servicioPropiedad.registrarPropiedad(servicioUsuario.traerUsuarioPorId(idUsuario), nombre, ciudad, direccion, descripcion, precioPorNoche, Arrays.asList(archivos));
+
+        } catch (IOException e) {
+            e.getMessage();
+        }
+
+        return "propiedades.html";
     }
 
 }

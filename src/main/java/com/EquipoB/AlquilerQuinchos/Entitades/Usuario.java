@@ -8,7 +8,6 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
-import static org.springframework.web.bind.annotation.RequestMethod.HEAD;
 
 @Entity
 @Getter @Setter @ToString @AllArgsConstructor
@@ -31,7 +30,7 @@ public class Usuario {
     private List<Review> review;
 
     @OneToOne
-    private Imagen imagen;
+    private ImagenPropiedad imagen;
 
     @Enumerated(EnumType.STRING)
     private RolUsuario rol;
