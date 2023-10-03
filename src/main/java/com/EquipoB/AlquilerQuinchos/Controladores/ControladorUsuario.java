@@ -113,27 +113,4 @@ public class ControladorUsuario {
         return "usuario.html";//vista de formulario para inicio de sesion.
     }
 
-    @PreAuthorize("permitAll()")
-    @PostMapping("/registrarPropiedades")
-    public String registrarPropiedad(
-            @RequestParam Long idUsuario,
-            @RequestParam String nombre,
-            @RequestParam String ciudad,
-            @RequestParam String direccion,
-            @RequestParam Double precioPorNoche,
-            @RequestParam String descripcion,
-            @RequestParam MultipartFile[] archivos) {
-        try {
-
-            Propiedad propiedad = new Propiedad();
-
-            propiedad = servicioPropiedad.registrarPropiedad(servicioUsuario.traerUsuarioPorId(idUsuario), nombre, ciudad, direccion, descripcion, precioPorNoche, Arrays.asList(archivos));
-
-        } catch (IOException e) {
-            e.getMessage();
-        }
-
-        return "propiedades.html";
-    }
-
 }

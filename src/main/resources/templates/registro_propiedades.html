@@ -15,7 +15,7 @@
 
     <div class="rectangulo2">
         <!--        cambiar metodo a post y poner la ruta -->
-        <form class="formulario" th:action="@{/propiedades/registrar}" method="post" enctype="multipart/form-data" th:object="${propiedad}">
+        <form class="formulario" th:action="@{/propiedades/registro}" method="post" enctype="multipart/form-data" th:object="${propiedad}">
 
 <!--            captar id-->
             <input type="hidden" class="form-control" name="idUsuario" placeholder="NOMBRE DE LA PROPIEDAD" th:value="${session.usuariosession.id}" aria-label="Nombre">
@@ -44,12 +44,11 @@
                 <label for="archivos">SUBIR IMAGENES:</label>
                 <input type="file" name="archivos" id="archivos" multiple accept="image/*">
             </div>
-
-            <a th:href="@{/propiedades/lista}"><button class="btn btn-dark mt-3 botones">GUARDAR PROPIEDAD</button></a>
-             <a th:href="@{/usuario/perfil}"><button class="btn btn-dark mt-3 botones">CANCELAR</button></a>
+            <button type="submit" class="btn btn-dark mt-3 botones">GUARDAR PROPIEDAD</button>
 
         </form>
-       
+        <a th:href="@{/usuario/perfil}"><button class="btn btn-dark mt-3 botones">CANCELAR</button></a>
+        <a th:href="@{/propiedades/lista}"><button class="btn btn-dark mt-3 botones">VER PROPIEDADES</button></a>
     </div>
 
 </section >
