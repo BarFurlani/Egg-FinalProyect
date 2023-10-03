@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -84,6 +85,14 @@ public class PropiedadesControlador {
         model.addAttribute("propiedad", propiedad);
 
         return "propiedad.html";
+    }
+
+    @GetMapping("/login")
+    public String login(@RequestParam (required = false) String error, ModelMap modelo) {
+        if (error!=null) {
+            modelo.put("error", "Usuario o Contrasena invalidos");
+        }
+        return "index.html";
     }
 
 }
