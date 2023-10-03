@@ -1,5 +1,6 @@
 package com.EquipoB.AlquilerQuinchos.Servicios;
 
+import com.EquipoB.AlquilerQuinchos.Entitades.Propiedad;
 import com.EquipoB.AlquilerQuinchos.Entitades.Review;
 import com.EquipoB.AlquilerQuinchos.Entitades.Usuario;
 import com.EquipoB.AlquilerQuinchos.Excepciones.ExcepcionInformacionInvalida;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,18 +30,16 @@ public class ServicioReview {
     }
 
     @Transactional
-    public Review crearReview(Review review) {
+    public Review crearReview(Propiedad propiedad, Usuario inquilino, Usuario propietario, Integer rating, String comentario) {
+        Review review = new Review();
+        review.setPropiedad(propiedad);
+        review.setInquilino(inquilino);
+        review.setPropietario(propietario);
+        review.setPuntuacion(rating);
+        review.setComentario(comentario);
+        review.setFecha(LocalDate.now());
         validacion(review);
-
-        Optional<Usuario> inquilinoExistente =repositorioUsuario.findById(review.getInquilino().getId());
-        if (inquilinoExistente.isPresent()) {
-            review.setInquilino(inquilinoExistente.get());
-        } else {
-            Usuario inquilino = review.getInquilino();
-            servicioUsuario.registrarUsuario(inquilino);
-            review.setInquilino(inquilino);
-        }
-        return reviewRepository.save(review);
+        return  reviewRepository.save(review);
     }
 
     public List<Review> listarReviews() {

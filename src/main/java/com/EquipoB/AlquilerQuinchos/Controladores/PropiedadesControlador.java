@@ -11,7 +11,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -58,7 +57,7 @@ public class PropiedadesControlador {
     }
 
     @PreAuthorize("permitAll()")
-    @PostMapping("/registrar")
+    @PostMapping("/registro")
     public String registrarPropiedad(
             @RequestParam Long idUsuario,
             @RequestParam String nombre,
@@ -68,13 +67,14 @@ public class PropiedadesControlador {
             @RequestParam String descripcion,
             @RequestParam MultipartFile[] archivos) {
         try {
-             servicioPropiedad.registrarPropiedad(servicioUsuario.traerUsuarioPorId(idUsuario), nombre, ciudad, direccion, descripcion, precioPorNoche, Arrays.asList(archivos));
+            servicioPropiedad.registrarPropiedad(servicioUsuario.traerUsuarioPorId(idUsuario), nombre, ciudad, direccion, descripcion, precioPorNoche, Arrays.asList(archivos));
+            return "registro_propiedades.html";
 
         } catch (IOException e) {
             e.getMessage();
         }
 
-        return "propiedades.html";
+        return "redirect:/propiedades/formulario";
     }
 
     @GetMapping("/lista/{id}")
@@ -87,13 +87,5 @@ public class PropiedadesControlador {
         return "propiedad.html";
     }
 
-    @GetMapping("/login")
-    public String login(@RequestParam (required = false) String error, ModelMap modelo) {
-        if (error!=null) {
-            modelo.put("error", "Usuario o Contrasena invalidos");
-        }
-        return "index.html";
-    }
 
 }
-

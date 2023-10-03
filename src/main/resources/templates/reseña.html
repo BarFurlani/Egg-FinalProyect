@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <link rel="stylesheet" th:href="@{/css/propiedad.css}">
+        <title>QuinchoBiliaria</title>
+    </head>
+
+<body>
+    <section class="fondoPro">
+
+        <nav th:replace="/fragments/navbar :: nav"></nav>
+
+        <main class="card-container">
+          
+<!--Thymeleaf iterara sobre la lista ${propiedades} y generar dinámicamente las tarjetas de propiedades y las imágenes en el carrusel-->
+            <div class="card" th:each="reservas_pasadas : ${reservas_pasadas}">
+                <div class="card-body">
+                    <div id="carouselExample" class="carousel slide" data-ride="carousel" data-interval="5000">
+                        <div class="carousel-inner">
+                            <div th:each="propiedad, iterStat : ${reservas_pasadas}" class="carousel-item" th:classappend="${iterStat.index == 0} ? active">
+                                <img th:src="${reservas_pasadas.imagen}" class="d-block w-100" alt="...">
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="card-title" th:text="${reservas_pasadas.nombreEvento}"></h5>
+                    <p class="card-text" th:text="${reservas_pasadas.reseña}"></p>
+                </div>
+            </div>
+            <div class="card" >
+                <div class="card-body">
+                    <h5 class="card-title"> AGREGAR RESEÑA </h5>
+                    <a th:href="@{/reserva_pasada/registro}">
+                        <img src="https://e7.pngegg.com/pngimages/587/356/png-clipart-computer-icons-plus-and-minus-signs-addition-cdr-cross.png" alt="Logo" width="20" height="20"> 
+                    </a>
+                </div>
+            </div>
+        </main>
+        <footer th:replace="/fragments/footer :: footer"></footer>
+    </section>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+

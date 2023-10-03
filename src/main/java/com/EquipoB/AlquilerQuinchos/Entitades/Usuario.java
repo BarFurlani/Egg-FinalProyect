@@ -24,13 +24,14 @@ public class Usuario {
     private boolean alta;
     private boolean baja;
 
-    @ElementCollection
-    @CollectionTable(name = "reviews_usuario", joinColumns = @JoinColumn(name = "usuario_id"))
     @OneToMany(mappedBy = "inquilino", fetch = FetchType.LAZY)
-    private List<Review> review;
+    private List<Review> reviewsDadas;
+
+    @OneToMany(mappedBy = "propietario", fetch = FetchType.LAZY)
+    private List<Review> reviewsRecibidas;
 
     @OneToOne
-    private ImagenPropiedad imagen;
+    private ImagenUsuario imagen;
 
     @Enumerated(EnumType.STRING)
     private RolUsuario rol;
