@@ -38,14 +38,16 @@
                     <h5 class="card-title" th:text="${propiedad.nombre}"></h5>
                     <p class="card-text" th:text="${propiedad.descripcion}"></p>
                 </div>
-  <!--              <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <!-- Itera sobre las imágenes de la propiedad y muestra cada una en el carrusel 
-            <th:block th:each="imagen, iterStat : ${propiedad.imagenes}">
-                <div th:classappend="${iterStat.index == 0} ? 'carousel-item active' : 'carousel-item'">
-                    <img th:src="${imagen}" class="d-block w-100" alt="Imagen" />
-                </div>
-            </th:block>
+
+               <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner" th:each="imagen : ${propiedad.imagenes}">
+            <img th:src="@{imagen/propiedades/${imagen}}" alt="Imagen de la propiedad" class="card-img-top" />
+            <!--         Itera sobre las imágenes de la propiedad y muestra cada una en el carrusel
+                    <th:block th:each="imagen, iterStat : ${propiedad.imagenes}">
+                        <div th:classappend="${iterStat.index == 0} ? 'carousel-item active' : 'carousel-item'">
+                            <img th:src="${imagen}" class="d-block w-100" alt="Imagen" />
+                        </div>
+                    </th:block>-->
         </div>
         <a class="carousel-control-prev" href="#carouselExample" role="button" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -55,14 +57,14 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </a>
-    </div>-->
+    </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item" th:text="${propiedad.ciudad}"></li>
                     <li class="list-group-item" th:text="${propiedad.direccion}"></li>
                     <li class="list-group-item" th:text="${propiedad.precioPorNoche}"></li>
                 </ul>
                 <div class="card-body">
-                   <a href="/propiedades/lista/{id}"class="btn3">Ir a la propiedad</a>
+                    <a th:href="@{/propiedades/lista/__${propiedad.id}__}"> <button class="btn btn-primary"> Ver Propiedad</button></a>
 
 
                 </div>

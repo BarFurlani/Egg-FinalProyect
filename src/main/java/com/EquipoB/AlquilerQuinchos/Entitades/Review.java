@@ -16,7 +16,7 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Double puntuacion;
+    private Integer puntuacion;
     private String comentario;
     private LocalDate fecha;
 
@@ -26,6 +26,10 @@ public class Review {
     @ManyToOne
     @JoinColumn(name = "inquilino")
     private Usuario inquilino;
+
+    @ManyToOne
+    @JoinColumn(name = "propietario")
+    private Usuario propietario;
 
     public Review() {
     }

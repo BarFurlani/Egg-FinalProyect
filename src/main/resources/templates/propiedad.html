@@ -8,17 +8,19 @@
     <section class="fondoPro">
         <nav th:replace="/fragments/navbar :: nav"></nav>
 
-        <main class="card-container">
-          
-                <h5 th:text="${propiedad.propiedadNombre}"></h5>
-                <p th:text="${propiedad.descripcion}"></p>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item" th:text="${propiedad.propiedadCiudad}"></li>
-                    <li class="list-group-item" th:text="${propiedad.propiedadDireccion}"></li>
-                    <li class="list-group-item" th:text="${propiedad.precioNoche}"></li>
-                    <li class="list-group-item" th:text="${usuario.usuarioEmail}"></li>
-                    <li class="list-group-item" th:text="${usuario.telefono}"></li>
-                </ul>
+        <main>
+            <div class="card-container">
+            <h5 th:text="${propiedad.nombre}"></h5>
+            <p th:text="${propiedad.descripcion}"></p>
+                <div class="carousel-inner" th:each="imagen : ${propiedad.imagenes}">
+                    <img th:src="@{imagen/propiedades/${imagen.id}}" alt="Imagen de la propiedad" class="card-img-top" />
+                    </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" th:text="${propiedad.ciudad}"></li>
+                <li class="list-group-item" th:text="${propiedad.direccion}"></li>
+                <li class="list-group-item" th:text="${propiedad.precioPorNoche}"></li>
+
+            </ul>
                 <div>
                     <button class="btn-see">ALQUILAR</button>
                 </div>

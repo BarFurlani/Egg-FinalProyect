@@ -57,7 +57,7 @@ public class PropiedadesControlador {
     }
 
     @PreAuthorize("permitAll()")
-    @PostMapping("/registrar")
+    @PostMapping("/registro")
     public String registrarPropiedad(
             @RequestParam Long idUsuario,
             @RequestParam String nombre,
@@ -68,13 +68,13 @@ public class PropiedadesControlador {
             @RequestParam MultipartFile[] archivos) {
         try {
             servicioPropiedad.registrarPropiedad(servicioUsuario.traerUsuarioPorId(idUsuario), nombre, ciudad, direccion, descripcion, precioPorNoche, Arrays.asList(archivos));
-            return "propiedades.html";
+            return "registro_propiedades.html";
 
         } catch (IOException e) {
             e.getMessage();
         }
 
-        return "propiedades.html";
+        return "redirect:/propiedades/formulario";
     }
 
     @GetMapping("/lista/{id}")
@@ -86,5 +86,6 @@ public class PropiedadesControlador {
 
         return "propiedad.html";
     }
+
 
 }

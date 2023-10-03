@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
@@ -15,7 +16,7 @@
 
     <div class="rectangulo2">
         <!--        cambiar metodo a post y poner la ruta -->
-        <form class="formulario" th:action="@{/reserva_pasada/registro}" method="post" enctype="multipart/form-data" th:object="${reseña}">
+        <form class="formulario" th:action="@{/reserva_pasada/agregarReview}" method="post" enctype="multipart/form-data" th:object="${review}">
 
 <!--            captar id-->
             <input type="hidden" class="form-control" name="idUsuario" placeholder="NOMBRE DE LA PROPIEDAD" th:value="${session.usuariosession.id}" aria-label="Nombre">
