@@ -65,7 +65,7 @@ public class ControladorReview {
         } else {
             model.put("mensajeError", "Propiedad no encontrada");
         }
-        return "redirect:/reserva_pasada/reseña";
+        return "redirect:/reserva_pasada/lista";
     }
 
     @GetMapping("/lista")

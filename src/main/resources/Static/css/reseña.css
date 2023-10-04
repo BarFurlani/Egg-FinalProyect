@@ -1,16 +1,22 @@
-.fondoPro {
-    background-image: url("../img/propiedad2.jpg");
+.reseña {
+    background-image: url("../img/reseña1.jpg");
     background-size: cover;
+    background-position: center;
     width: 100%;
     height: 100vh;
-    margin: 0%;
-}
-
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
+    display: flex; 
+    font-family: Arial, sans-serif;
+    align-items: center;
     justify-content: space-between;
-    padding: 5%;
+}
+.contenedor {
+    display: flex;
+    padding: 20px;
+    margin-bottom: -20px; 
+    width: 100%;
+    flex-direction: column; /* Para centrar el contenido verticalmente */
+    justify-content: center; /* Para centrar el contenido verticalmente */
+    align-items: center; /* Para centrar el contenido horizontalmente */
 }
 
 .card {
@@ -18,6 +24,10 @@
     height: auto;
     flex-shrink: 0;
     background: #D9D9D9;
+    display: flex; /* Agrega esta propiedad para permitir el centrado vertical */
+    flex-direction: column; /* Para centrar el contenido verticalmente */
+    justify-content: center; /* Para centrar el contenido verticalmente */
+    align-items: center; /* Para centrar el contenido horizontalmente */
 }
 
 .card-img-top {
