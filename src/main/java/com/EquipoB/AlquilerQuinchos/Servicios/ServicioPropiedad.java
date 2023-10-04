@@ -94,13 +94,20 @@ public class ServicioPropiedad {
     //UPDATE
 
     @Transactional
-    public Propiedad actualizarPropiedad(Long id, Propiedad propiedadActualizada) {
-        return repositorioPropiedad.findById(id)
-                .map(propiedad -> {
-                    propiedadActualizada.setId(id);
-                    validacion(propiedadActualizada);
-                    return repositorioPropiedad.save(propiedadActualizada);
-                }).orElseThrow(() -> new ExcepcionNoEncontrado("No se pudo encontrar a la propiedad con ID: " + id));
+    public Propiedad actualizarPropiedad(Long id, String nombre, String ciudad, String direccion, String descripcion, Double precioPorNoche) {
+        Optional<Propiedad> propiedadOptional = repositorioPropiedad.findById(id);
+        if (propiedadOptional.isPresent()) {
+            Propiedad newPropiedad = propiedadOptional.get();
+            newPropiedad.setNombre(nombre);
+            newPropiedad.setCiudad(ciudad);
+            newPropiedad.setDireccion(direccion);
+            newPropiedad.setDescripcion(descripcion);
+            newPropiedad.setPrecioPorNoche(precioPorNoche);
+            validacion(newPropiedad);
+            return repositorioPropiedad.save(newPropiedad);
+        } else {
+            throw new ExcepcionNoEncontrado("No se pudo encontrar a la propiedad con ID: " + id);
+        }
     }
 
     //DELETE
@@ -146,6 +153,16 @@ public class ServicioPropiedad {
         return repositorioPropiedad.save(propiedad);
     }
 
+    public void agregarImagen(Long id, List<MultipartFile> imagenes) throws IOException {
+        Optional<Propiedad> propiedadOptional = repositorioPropiedad.findById(id);
+        if (propiedadOptional.isPresent()) {
+            for (MultipartFile imagen : imagenes) {
+                servicioImagen.guardarImagen(imagen, propiedadOptional.get());
+            }
+        } else {
+            throw new ExcepcionNoEncontrado("No se pudo encontrar a la propiedad con ID: " + id);
+        }
+    }
 
     public void validacion(Propiedad propiedad) {
         if (propiedad.getNombre() == null || propiedad.getNombre().isEmpty()) {
