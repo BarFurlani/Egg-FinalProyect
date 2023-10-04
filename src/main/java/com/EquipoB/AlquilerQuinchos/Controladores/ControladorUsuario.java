@@ -85,20 +85,15 @@ public class ControladorUsuario {
         if (error != null) {
             modelo.put("error", "Usuario o contraseña inválidos.");//envia un mensaje a la vista mediante un modelo, con la referencia "error" si la variable error contiene una excepción.
         }
+
         return "login.html";//vista de formulario para inicio de sesion.
     }
 
 
 
-    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("permitAll()")
     @GetMapping("/inicio")
     public String inicio(HttpSession session) {
-
-        Usuario logueado = (Usuario) session.getAttribute("usuariosession");
-
-        if (logueado.getRol().toString().equals("ADMIN")) {
-            return "redirect:/admin/dashboard";
-        }
         return "inicio.html";
     }
 

@@ -28,31 +28,41 @@
 <!--fin navbar-->
 
 
+        <h1 style="text-align: center">Listar Usuarios</h1>
+        <table class="table table-light text-center">
 
 
 
-        <section class="metodos">
+                <thead>
+                    <tr >
+                        <th class="bg-primary text-bg-primary" scope="col">id</th>
+                        <th class="bg-primary text-bg-primary" scope="col">Titulo </th>
+                        <th class="bg-primary text-bg-primary" scope="col">Cuerpo</th>
+                        <th class="bg-primary text-bg-primary" scope="col">Dar Baja/Alta</th>
+                        <th class="bg-primary text-bg-primary" scope="col">Estado</th>
+                    </tr>
+
+                </thead>
 
 
-        </section>
+                <tbody th:each="usuario: ${listausuarios}">
+                <tr>
 
+                    <th scope="row" th:text="${usuario.id}"></th>
+                    <td th:text="${usuario.username}"></td>
+                    <td th:text="${usuario.email}"></td>
+                    <td sec:authorize="hasRole('ROL_ADMINISTRADOR')">
+                        <!--                                 para el quiera saber esto tambien funciona-->
+                        <!--                                <a class="btn btn-primary" th:href="@{/noticia/modificar/__${noticia.id}__}">modificar a</a>-->
+                        <form method="post" th:action="@{/dashboard/listar_usuarios/__${usuario.id}__}">
+                            <button type="submit" class="btn btn-primary"> DarBaja</button>
+                        </form>
 
+                    </td>
+<!-- <a methods="post" th:href="@{/dashboard/listar_usuarios/__${usuario.id}__}"> <button class="btn btn-primary"> DarBaja</button></a>-->
 
-<!--                <tbody th:each="usuario: ${lista_usuarios}">-->
-<!--                <tr>-->
+                    <td th:text="${usuario.alta}"></td>
 
-<!--                    <th scope="row" th:text="${usuario.id}"></th>-->
-<!--                    <td th:text="${usuario.nombre}"></td>-->
-<!--                    <td th:text="${usuario.email}"></td>-->
-<!--                    <td sec:authorize="hasRole('ADMIN')">-->
-<!--                        &lt;!&ndash;                                 para el quiera saber esto tambien funciona&ndash;&gt;-->
-<!--                        &lt;!&ndash;                                <a class="btn btn-primary" th:href="@{/noticia/modificar/__${noticia.id}__}">modificar a</a>&ndash;&gt;-->
-<!--                        <a th:href="@{}"> <button class="btn btn-primary"> DarBaja</button></a>-->
-
-<!--                    </td>-->
-<!--                    <td>-->
-<!--                        <a th:href="@{}"> <button class="btn btn-primary"> DarAlta</button></a>-->
-<!--                    </td>-->
 
                 </tr>
                 </tbody>
@@ -61,7 +71,7 @@
 
 
 
-
+        </table>
 
 
         </main>

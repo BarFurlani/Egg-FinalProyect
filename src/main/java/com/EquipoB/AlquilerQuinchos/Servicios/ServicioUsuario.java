@@ -147,8 +147,13 @@ public class ServicioUsuario implements UserDetailsService {
         Optional<Usuario> usuarioOptional = repositorioUsuario.findById(id);
         if (usuarioOptional.isPresent()) {
             Usuario usuario = usuarioOptional.get();
-            usuario.setAlta(true);
-            usuario.setBaja(false);
+            if(usuario.isAlta()){
+                usuario.setAlta(false);
+            }else{
+                usuario.setAlta(true);
+            }
+
+
             repositorioUsuario.save(usuario);
         } else {
             throw new ExcepcionNoEncontrado("No se pudo encontrar al usuario con ID: " + id);
@@ -167,7 +172,20 @@ public class ServicioUsuario implements UserDetailsService {
             throw new ExcepcionNoEncontrado("No se pudo encontrar al usuario con ID: " + id);
         }
     }
-
+    public boolean traerEstadoAlta(String email) {
+        try {
+            Optional<Usuario> usuarioOptional = repositorioUsuario.findByEmail(email);
+            if (usuarioOptional.isPresent()) {
+                Usuario usuario = usuarioOptional.get();
+                return usuario.isAlta();
+            } else {
+                // No se encontró ningún usuario con el correo electrónico proporcionado
+                return false; // O podrías lanzar una excepción personalizada si lo prefieres
+            }
+        } catch (Exception e) {
+            throw new ExcepcionNoEncontrado("No se pudo encontrar al usuario con el email: " + email);
+        }
+    }
 
     public void validacion(Usuario usuario) {
         if (usuario.getUsername() == null || usuario.getUsername().isEmpty()) {
@@ -209,6 +227,9 @@ public class ServicioUsuario implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
         Usuario usuario = repositorioUsuario.buscarPorEmail(email);
+        if (!usuario.isAlta()) {
+            return null;
+        }
 
         if (usuario != null) {
             List<GrantedAuthority> permisos = new ArrayList<>();

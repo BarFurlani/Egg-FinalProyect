@@ -74,4 +74,9 @@ public class ServicioImagenPropiedad {
             throw new ExcepcionInformacionInvalida("El archivo no es una imagen JPEG válida");
         }
     }
+
+    public byte[] imagenABite(Long id) {
+        return repositorioImagen.findById(id).get().getContenido();
+    }
+
 }

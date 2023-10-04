@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -24,41 +25,42 @@ public class SeguridadConfiguracion extends WebSecurityConfigurerAdapter {
     public ServicioUsuario usuarioServicio;
 
 
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(usuarioServicio).passwordEncoder(new BCryptPasswordEncoder());
+        auth.userDetailsService(usuarioServicio)
+            .passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
-        http.authorizeRequests()
-            .antMatchers("/admin/*")
-            .hasRole("ADMIN")
-            .antMatchers("/css/*", "/js/*", "/img/*", "/**")
-            .permitAll()
-            .and()
-            .formLogin()
-            .loginPage("/login")
-            .loginProcessingUrl("/logincheck")
-            .usernameParameter("email")
-            .passwordParameter("password")
-            .defaultSuccessUrl("/inicio")
-            .failureUrl("/usuario/login?error=true")
-            .permitAll()
-            .and()
-            .logout()
-            .logoutUrl("/logout")
-            .logoutSuccessUrl("/inicio")
-            .permitAll()
-            .and()
-            .csrf()
-            .disable();
-
+        http
+                .authorizeRequests()
+                .antMatchers("/admin/*").hasRole("ADMIN")
+                .antMatchers("/css/*", "/js/*", "/img/*", "/**").permitAll()
+                .antMatchers("/inicio", "/403.html").permitAll()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/logincheck")
+                .usernameParameter("email")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/inicio")
+                .failureUrl("/usuario/login?error=true")
+                .permitAll()
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/inicio")
+                .permitAll()
+                .and()
+                .csrf()
+                .disable();
     }
 
 
 }
+
 
 
 

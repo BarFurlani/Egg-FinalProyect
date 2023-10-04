@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RepositorioImagenPropiedad extends JpaRepository<ImagenPropiedad, Long> {
+
+
 }
