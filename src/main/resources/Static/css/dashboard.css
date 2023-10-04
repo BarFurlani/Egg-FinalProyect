@@ -1,0 +1,18 @@
+.metodos{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 500px;
+    width: 100%;
+}
+
+.dashboard__titulo{
+    color: white;
+    text-align: center;
+}
+
+
+a{
+    text-decoration: none;
+}
+

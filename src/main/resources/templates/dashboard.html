@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="/fragments/head :: head">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 </head>
 
 <body>
@@ -33,13 +34,29 @@
 
         <section class="metodos">
 
-            <div class="metodos-card__container">
-                <h3 class="metodos-card__titulo">Primer Metodo</h3>
-                <img class="metodos-card__imagenes" src="" alt="">
-                <a th:href="@{/dashboard/listar_usuarios}" class="metodos-card__button" href="">Accion</a>
 
+
+            <div class="col-2 mb-2" >
+                <a th:href="@{/dashboard/listar_usuarios}" >
+                    <div class="card " style="width: 18rem" >
+                        <img src="/img/listardashboard.jpg "  class="card-img-top" style="aspect-ratio: 16/9" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Alta Baja Usuarios</h5>
+                        </div>
+                    </div>
+                </a>
             </div>
 
+            <div class="col-2 mb-2" >
+                <a th:href="@{dashboard_usuarios_listar.html}" >
+                    <div class="card " style="width: 18rem" >
+                        <img src="/img/usuariosdashboard.jpg "  class="card-img-top" style="aspect-ratio: 16/9" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Listar Propiedades</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </section>
 
 

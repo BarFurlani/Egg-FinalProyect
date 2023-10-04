@@ -1,5 +1,6 @@
 package com.EquipoB.AlquilerQuinchos.Servicios;
 
+import com.EquipoB.AlquilerQuinchos.Entitades.ImagenPropiedad;
 import com.EquipoB.AlquilerQuinchos.Entitades.Propiedad;
 import com.EquipoB.AlquilerQuinchos.Entitades.Usuario;
 import com.EquipoB.AlquilerQuinchos.Enumeraciones.TipoDePropiedad;
@@ -163,5 +164,9 @@ public class ServicioPropiedad {
             throw new ExcepcionInformacionInvalida("Descripción del lugar requerida");
         }
 
+    }
+
+    public Propiedad getOne(Long id){
+        return repositorioPropiedad.getOne(id);
     }
 }
