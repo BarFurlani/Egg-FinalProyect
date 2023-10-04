@@ -53,4 +53,14 @@ public class ControladorImagen {
     }
 
 
+//    hacer un metodo igual solo que busque imagenes por id de la imagen no de la propiedad
+//    @GetMapping("/{id}")
+//    public ResponseEntity<byte[]> imagenPropiedad(@PathVariable Long id) {
+//        byte[] imgPropiedad = servicioImagen.imagenABite(id);
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.IMAGE_JPEG);
+//        return new ResponseEntity<>(imgPropiedad, headers, HttpStatus.OK);
+//    }
+
+
 }

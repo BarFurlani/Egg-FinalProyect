@@ -1,31 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="/fragments/head :: head">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/propiedad.css}">
+    <title>QuinchoBiliaria</title>
+    <style>
+        .centered-content {
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
-    <section class="fondoPro">
+     <header>
         <nav th:replace="/fragments/navbar :: nav"></nav>
+     </header>
+    <section>
 
-        <main>
-            <div class="card-container">
-            <h5 th:text="${propiedad.nombre}"></h5>
-            <p th:text="${propiedad.descripcion}"></p>
-                <div class="carousel-inner" th:each="imagen : ${propiedad.imagenes}">
+    
+          <main class="propiedad" >
+           <div class="cuadrado">
+               <div class="rectangulo1">
+              <h5 th:text="${propiedad.nombre}"></h5>
+              <p th:text="${propiedad.descripcion}"></p>
+               </div>
+                    
+               <div class ="rectangulo2">
+                   <div class="carousel-inner" th:each="imagen : ${propiedad.imagenes}">
                     <img th:src="@{imagen/propiedades/${imagen.id}}" alt="Imagen de la propiedad" class="card-img-top" />
-                    </div>
-            <ul class="list-group list-group-flush">
+                   </div>
+                </div>
+            
+               <div class="rectangulo3">
+              <ul class="list-group list-group-flush">
                 <li class="list-group-item" th:text="${propiedad.ciudad}"></li>
                 <li class="list-group-item" th:text="${propiedad.direccion}"></li>
                 <li class="list-group-item" th:text="${propiedad.precioPorNoche}"></li>
 
-            </ul>
+              </ul>
                 <div>
                     <button class="btn-see">ALQUILAR</button>
-                </div>
+                </div>            
             </div>
-        </main>
+            </div>
+          </main>
+        </section>
         <footer th:replace="/fragments/footer :: footer"></footer>
     </section>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -33,4 +54,3 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
