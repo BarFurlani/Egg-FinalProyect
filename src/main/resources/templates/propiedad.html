@@ -25,6 +25,15 @@
                <div class="rectangulo1">
               <h5 th:text="${propiedad.nombre}"></h5>
               <p th:text="${propiedad.descripcion}"></p>
+               <ul class="list-group list-group-flush">
+                <li class="list-group-item" th:text="${propiedad.ciudad}"></li>
+                <li class="list-group-item" th:text="${propiedad.direccion}"></li>
+                <li class="list-group-item" th:text="${propiedad.precioPorNoche}"></li>
+
+              </ul>
+                <div>
+                    <button class="btn-see">ALQUILAR</button>
+                </div>  
                </div>
                     
                <div class ="rectangulo2">
@@ -34,17 +43,22 @@
                 </div>
             
                <div class="rectangulo3">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item" th:text="${propiedad.ciudad}"></li>
-                <li class="list-group-item" th:text="${propiedad.direccion}"></li>
-                <li class="list-group-item" th:text="${propiedad.precioPorNoche}"></li>
-
-              </ul>
-                <div>
-                    <button class="btn-see">ALQUILAR</button>
-                </div>            
+                   
+                  <div class="contenedor"><!--th:each="review : ${reviews}"-->
+                    <h5>INCREIBLE<!--th:text="${review.nombrePropiedad}"--></h5>
+                    <p>Hermoso espacio para celebrar tu evento soñado <!--th:text="${review.comentario}"--></p>
+                    <p>Puntuación: 9 <span <!--th:text="${review.puntuacion}"--></span></p>
+                </div> 
+          
+               <a th:href="@{/reserva_pasada/formulario}"> <button class="btn-see">AGREGAR COMENTARIO</button> </a>   
+                    
+            </div>  
+                          
             </div>
+          
+               
             </div>
+              
           </main>
         </section>
         <footer th:replace="/fragments/footer :: footer"></footer>

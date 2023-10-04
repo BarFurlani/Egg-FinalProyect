@@ -14,15 +14,15 @@
         <nav th:replace="/fragments/navbar :: nav"></nav>
     </header>
             <main class="usuarios">
-                  <div>
-                    <h1 class="hola">Bienvenido a QuinchoBiliaria</h1>
-                </div> 
-                                               
+                                                             
                 <div class="contenedor">
                     
                     <div class ="cuadrado">
                     
-                   
+                     <div>
+                    <h1 class="hola">Bienvenido a QuinchoBiliaria</h1>            
+                 </div>
+                     </div> 
                        <div class ="c1">
            
                 
@@ -32,21 +32,7 @@
                             </a> Hacer reserva
                         </div>
                        </div>
-                        <div class ="c2">
-                        <div class="col-6 col-md-6 col-lg-6 col-xl-6 text-center" sec:authorize="hasRole('ROL_PROPIETARIO')">
-                            <a th:href="@{/propiedades}">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRs9OEDmiPsjDg3sRAkTQ_mlcCCbaW0Nbj6fw&usqp=CAU" alt="Logo" width="100" height="100"> 
-                            </a>Tus propiedades
-                        </div>
-                        </div>
-                         <div class ="c3">
-                        <div class="col-6 col-md-6 col-lg-6 col-xl-6 text-center">
-                            <a th:href="@{/reserva_pasada/formulario}">
-                                <img src="https://e7.pngegg.com/pngimages/829/233/png-clipart-small-black-pig-computer-icons-balloon-black-balloons-s-photography-black.png" alt="Logo" width="100" height="100"> 
-                            </a>Reservas pasadas
-                        </div>
-                        </div> 
-                          <div class ="c4">
+                      <div class ="c2">
                        <div class="col-6 col-md-6 col-lg-6 col-xl-6 text-center" sec:authorize="hasRole('ROL_PROPIETARIO')">
 
                             <a th:href="@{/propiedades/formulario}">

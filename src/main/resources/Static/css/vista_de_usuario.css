@@ -80,9 +80,7 @@ img {
     margin: 0 auto; 
 }
 .c1,
-.c2,
-.c3,
-.c4 {
+.c2 {
     flex: 0 1 calc(50% - 20px);
     max-width: calc(50% - 20px);
     height: 200px;

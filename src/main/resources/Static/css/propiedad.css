@@ -60,8 +60,16 @@ main.propiedad {
     justify-content: center; 
     align-items: center; 
 }
-
-
+.contenedor{
+    width: 234px;
+    height: auto;
+    flex-shrink: 0;
+    background: #D9D9D9;
+    display: flex; /* Agrega esta propiedad para permitir el centrado vertical */
+    flex-direction: column; /* Para centrar el contenido verticalmente */
+    justify-content: center; /* Para centrar el contenido verticalmente */
+    align-items: center; /* Para centrar el contenido horizontalmente */
+}
 footer {
     background-color: #000 !important;
     padding: 0 24px;
