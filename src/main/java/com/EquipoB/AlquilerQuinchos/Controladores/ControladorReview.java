@@ -34,7 +34,6 @@ public class ControladorReview {
         this.servicioPropiedad = servicioPropiedad;
     }
 
-    @PreAuthorize("permitAll()")
     @GetMapping("/formulario")
     public String mostrarForm(Model model) {
         Review review = new Review();
@@ -45,7 +44,7 @@ public class ControladorReview {
     @PostMapping("/agregarReview")
     public String agregarReview(
             @RequestParam String nombrePropiedad,
-            @RequestParam Long idInquilino,
+            @RequestParam Long idUsuario,
             @RequestParam Integer puntuacion,
             @RequestParam String comentario,
             @RequestParam MultipartFile[] archivos,
@@ -54,7 +53,7 @@ public class ControladorReview {
         Propiedad propiedad = servicioPropiedad.mostrarPropiedadPorNombre(nombrePropiedad);
         if (propiedad != null) {
             try {
-                servicioReview.crearReview(propiedad, servicioUsuario.traerUsuarioPorId(idInquilino), propiedad.getPropietario(), puntuacion, comentario, Arrays.asList(archivos));
+                servicioReview.crearReview(propiedad, servicioUsuario.traerUsuarioPorId(idUsuario), propiedad.getPropietario(), puntuacion, comentario, Arrays.asList(archivos));
                 model.put("mensajeExito", "Posteado!");
             } catch (ExcepcionInformacionInvalida e) {
                 model.put("mensajeError", e.getMessage());

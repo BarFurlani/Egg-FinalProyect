@@ -29,7 +29,9 @@
                     
                <div class ="rectangulo2">
                    <div class="carousel-inner" th:each="imagen : ${propiedad.imagenes}">
-                    <img th:src="@{imagen/propiedades/${imagen.id}}" alt="Imagen de la propiedad" class="card-img-top" />
+
+                       <img th:src="@{/imagen/__${imagen.id}__}" alt="Imagen de la propiedad"
+                            class="card-img-top"/>
                    </div>
                 </div>
             
