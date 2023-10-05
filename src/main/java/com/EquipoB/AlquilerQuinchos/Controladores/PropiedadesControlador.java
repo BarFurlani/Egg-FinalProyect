@@ -65,14 +65,16 @@ public class PropiedadesControlador {
         try {
             servicioPropiedad.registrarPropiedad(servicioUsuario.traerUsuarioPorId(idUsuario), nombre, ciudad, direccion, descripcion, precioPorNoche, Arrays.asList(archivos));
             model.put("mensajeExito", "Propiedad registrada con éxito!");
+            return "registro_propiedades.html";
         } catch (IOException e) {
             e.printStackTrace();
             model.put("mensajeError", "Error al procesar las imágenes");
+            return "registro_propiedades.html";
         } catch (ExcepcionInformacionInvalida e) {
             model.put("mensajeError", e.getMessage());
+            return "registro_propiedades.html";
         }
 
-        return "redirect:/propiedades/formulario";
     }
 
     @GetMapping("/lista/{id}")

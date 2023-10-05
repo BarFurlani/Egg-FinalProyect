@@ -16,7 +16,7 @@
 
     <div class=contenedor>
         <!--        cambiar metodo a post y poner la ruta -->
-        <form class="formulario" th:action="@{/reserva_pasada/agregarReview}" method="post" enctype="multipart/form-data" th:object="${review}">
+        <form class="formulario" th:action="@{/reviews/agregarReview}" method="post" enctype="multipart/form-data" th:object="${review}">
 
 <!--            captar id-->
             <input type="hidden" class="form-control" name="idUsuario" placeholder="NOMBRE DE LA PROPIEDAD" th:value="${session.usuariosession.id}" aria-label="Nombre">
@@ -24,15 +24,26 @@
             <div class="form-group my-3">
                 <h3 class="card-title">CUENTANOS TU EXPERIENCIA</h3>
             </div>
+
+            <div  class="alert alert-danger text-center alert-dismissible fade show" th:if="${mensajeError!=null}">
+                <p th:text="${mensajeError}"></p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            <div class="alert alert-success text-center alert-dismissible fade show" th:if="${mensajeExito!=null}">
+                <p th:text="${mensajeExito}"></p>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
             <div class="form-group my-3">
-                <input type="text" class="form-control" name="nombre" placeholder="NOMBRE DEL EVENTO" th:value="${nombrePropiedad}" aria-label="Nombre">
+                <input type="text" class="form-control" name="nombrePropiedad" placeholder="NOMBRE DEL EVENTO" th:value="${nombrePropiedad}" aria-label="Nombre">
             </div>
             <div class="form-group my-3">
-                <input type="text" class="form-control" name="puntiacion" placeholder="Del 1 al 10 (siendo diez perfecto) ¿Cuanto nos pondrias?" th:value="${puntuacion}" aria-label="Nombre">
+                <input type="text" class="form-control" name="puntuacion" placeholder="Del 1 al 10 (siendo diez perfecto) ¿Cuanto nos pondrias?" th:value="${puntuacion}" aria-label="Nombre">
             </div>
             <div class="form-group my-3">
                 <label for="descripcion">DESCRIPCION DEL EVENTO:</label>
-                <textarea class="form-control" name="descripcion" id="descripcion" placeholder="Escribenos que piensas de nuestro lugar" rows="4" th:text="${comentario}"></textarea>
+                <textarea class="form-control" name="comentario" id="descripcion" placeholder="Escribenos que piensas de nuestro lugar" rows="4" th:text="${comentario}"></textarea>
             </div>
             <div class="form-group my-3">
                 <label for="archivos">SUBIR IMAGENES:</label>
@@ -43,7 +54,7 @@
 
         </form>
         
-        <a th:href="@{/reserva_pasada/lista}"><button class="btn btn-dark mt-3 botones">MIS RESEÑAS</button></a>
+        <a th:href="@{/reviews/lista}"><button class="btn btn-dark mt-3 botones">MIS RESEÑAS</button></a>
          <a th:href="@{/usuario/perfil}"><button class="btn btn-dark mt-3 botones">CANCELAR</button></a>
        
     </div>

@@ -93,8 +93,8 @@ public class ServicioReview {
         if (review.getComentario() == null || review.getComentario().isEmpty()) {
             throw new ExcepcionInformacionInvalida("El comentario no puede estar vacío");
         }
-        if (review.getPuntuacion() == null || review.getPuntuacion() < 0 && review.getPuntuacion() > 5) {
-            throw new ExcepcionInformacionInvalida("La puntuación debe ser entre 1 y 5");
+        if (review.getPuntuacion() == null || review.getPuntuacion() < 0 && review.getPuntuacion() > 10) {
+            throw new ExcepcionInformacionInvalida("La puntuación debe ser entre 1 y 10");
         }
     }
 }

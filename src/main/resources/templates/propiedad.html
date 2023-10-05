@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
@@ -14,43 +14,60 @@
 </head>
 
 <body>
-     <header>
-        <nav th:replace="/fragments/navbar :: nav"></nav>
-     </header>
-    <section>
+<header>
+    <nav th:replace="/fragments/navbar :: nav"></nav>
+</header>
+<section>
 
-    
-          <main class="propiedad" >
-           <div class="cuadrado">
-               <div class="rectangulo1">
-              <h5 th:text="${propiedad.nombre}"></h5>
-              <p th:text="${propiedad.descripcion}"></p>
-               </div>
-                    
-               <div class ="rectangulo2">
-                   <div class="carousel-inner" th:each="imagen : ${propiedad.imagenes}">
-                    <img th:src="@{imagen/propiedades/${imagen.id}}" alt="Imagen de la propiedad" class="card-img-top" />
-                   </div>
+
+    <main class="propiedad" >
+        <div class="cuadrado">
+            <div class="rectangulo1">
+                <h5 th:text="${propiedad.nombre}"></h5>
+                <p th:text="${propiedad.descripcion}"></p>
+            </div>
+
+            <div class ="rectangulo2">
+                <div class="carousel-inner" th:each="imagen : ${propiedad.imagenes}">
+                    <img th:src="@{/imagen/propiedad/__${imagen.id}__}" alt="Imagen de la propiedad"
+                         class="card-img-top rounded-image"/>
                 </div>
-            
-               <div class="rectangulo3">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item" th:text="${propiedad.ciudad}"></li>
-                <li class="list-group-item" th:text="${propiedad.direccion}"></li>
-                <li class="list-group-item" th:text="${propiedad.precioPorNoche}"></li>
+            </div>
 
-              </ul>
+            <div class="rectangulo3">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <span class="label">Ciudad:</span>
+                        <span th:text="${propiedad.ciudad}"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="label">Dirección:</span>
+                        <span th:text="${propiedad.direccion}"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="label">Precio por Noche:</span>
+                        <span th:text="${propiedad.precioPorNoche}"></span>
+                    </li>
+                </ul>
+                <div class="fecha">
+                    <label for="fecha_ingreso">Fecha de Ingreso:</label>
+                    <input type="date" id="fecha_ingreso" name="fecha_ingreso">
+                </div>
+                <div class="fecha">
+                    <label for="fecha_salida">Fecha de Salida:</label>
+                    <input type="date" id="fecha_salida" name="fecha_salida">
+                </div>
                 <div>
                     <button class="btn-see">ALQUILAR</button>
-                </div>            
+                </div>
             </div>
-            </div>
-          </main>
-        </section>
-        <footer th:replace="/fragments/footer :: footer"></footer>
-    </section>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        </div>
+    </main>
+</section>
+<footer th:replace="/fragments/footer :: footer"></footer>
+</section>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
