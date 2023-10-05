@@ -23,18 +23,23 @@
                             </div>
                         </div>
                     </div>-->
-                    <h5 class="card-title" th:text="${review.nombrePropiedad}"></h5>
+                    <h5 class="card-title" th:text="${review.inquilino.username}"></h5>
                     <p class="card-text" th:text="${review.comentario}"></p>
                     <p class="card-text">Puntuación: <span th:text="${review.puntuacion}"></span></p>
-                    <div class="carousel-inner">
-                      <img th:src="@{/imagen/review/__${review.id}__}" alt="Imagen del evento"
-                         class="card-img-top"/></div>
+
+                   <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+
+                        <div class="carousel-inner" th:each="imagen : ${review.imagenes}">
+                            <img th:src="@{/imagen/review/__${imagen.id}__}" alt="Imagen de la reseña"
+                                 class="card-img-top"/>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="card" >
                 <div class="card-body">
                     <h5 class="card-title"> AGREGAR RESEÑA </h5>
-                    <a th:href="@{/reserva_pasada/registro}">
+                    <a th:href="@{/reviews/formulario}">
                         <img src="https://e7.pngegg.com/pngimages/587/356/png-clipart-computer-icons-plus-and-minus-signs-addition-cdr-cross.png" alt="Logo" width="20" height="20"> 
                     </a>
                 </div>

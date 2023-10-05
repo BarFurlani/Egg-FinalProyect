@@ -60,7 +60,7 @@
             <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
 
                 <div class="carousel-inner" th:each="imagen : ${propiedad}">
-                    <img th:src="@{/imagen/__${imagen.id}__}" alt="Imagen de la propiedad"
+                    <img th:src="@{/imagen/propiedades/__${imagen.id}__}" alt="Imagen de la propiedad"
                          class="card-img-top"/>
                 </div>
 

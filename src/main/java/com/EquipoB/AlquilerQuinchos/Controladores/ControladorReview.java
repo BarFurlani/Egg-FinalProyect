@@ -3,12 +3,10 @@ package com.EquipoB.AlquilerQuinchos.Controladores;
 import com.EquipoB.AlquilerQuinchos.Entitades.Propiedad;
 import com.EquipoB.AlquilerQuinchos.Entitades.Review;
 import com.EquipoB.AlquilerQuinchos.Excepciones.ExcepcionInformacionInvalida;
-import com.EquipoB.AlquilerQuinchos.Excepciones.ExcepcionNoEncontrado;
 import com.EquipoB.AlquilerQuinchos.Servicios.ServicioPropiedad;
 import com.EquipoB.AlquilerQuinchos.Servicios.ServicioReview;
 import com.EquipoB.AlquilerQuinchos.Servicios.ServicioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -20,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Controller
-@RequestMapping("/reserva_pasada")
+@RequestMapping("/reviews")
 public class ControladorReview {
 
     private final ServicioReview servicioReview;
@@ -38,7 +36,7 @@ public class ControladorReview {
     public String mostrarForm(Model model) {
         Review review = new Review();
         model.addAttribute("review", review);
-        return "reserva_pasada_registro.html";
+        return "review_registro.html";
     }
 
     @PostMapping("/agregarReview")
@@ -55,16 +53,19 @@ public class ControladorReview {
             try {
                 servicioReview.crearReview(propiedad, servicioUsuario.traerUsuarioPorId(idUsuario), propiedad.getPropietario(), puntuacion, comentario, Arrays.asList(archivos));
                 model.put("mensajeExito", "Posteado!");
+                return "review_registro.html";
             } catch (ExcepcionInformacionInvalida e) {
                 model.put("mensajeError", e.getMessage());
+                return "review_registro.html";
             } catch (IOException e) {
                 e.printStackTrace();
                 model.put("mensajeError", "Error al procesar imágenes");
+                return "review_registro.html";
             }
         } else {
             model.put("mensajeError", "Propiedad no encontrada");
         }
-        return "redirect:/reserva_pasada/lista";
+       return "redirect:/reviews/lista";
     }
 
     @GetMapping("/lista")
@@ -73,7 +74,7 @@ public class ControladorReview {
 
         model.addAttribute("reviews", reviews);
 
-        return "reseñas.html";
+        return "reseña.html";
     }
 
     @GetMapping("/lista/{id}")
@@ -108,7 +109,7 @@ public class ControladorReview {
         } catch (ExcepcionInformacionInvalida e) {
             model.put("mensajeError", e.getMessage());
         }
-        return "redirect:/reserva_pasada/lista";
+        return "redirect:/reviews/lista";
     }
 
     @GetMapping("/eliminar/{id}")
@@ -116,12 +117,12 @@ public class ControladorReview {
             servicioReview.eliminarReview(id);
             model.put("mensajeExito", "Reseña eliminada!");
 
-        return "redirect:/reserva_pasada/lista";
+        return "redirect:/reviews/lista";
     }
 
     @PostMapping("/agregarImagenes/{id}")
     public String agregarImagenes(@PathVariable Long id, MultipartFile[] archivos) throws IOException {
         servicioReview.agregarImagen(id, Arrays.asList(archivos));
-        return "redirect:/reserva_pasada/modificaciones";
+        return "redirect:/reviews/modificaciones";
     }
 }

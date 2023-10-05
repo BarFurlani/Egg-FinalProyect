@@ -3,6 +3,7 @@ package com.EquipoB.AlquilerQuinchos.Controladores;
 import com.EquipoB.AlquilerQuinchos.Entitades.ImagenPropiedad;
 import com.EquipoB.AlquilerQuinchos.Entitades.Usuario;
 import com.EquipoB.AlquilerQuinchos.Servicios.ServicioImagenPropiedad;
+import com.EquipoB.AlquilerQuinchos.Servicios.ServicioImagenReview;
 import com.EquipoB.AlquilerQuinchos.Servicios.ServicioPropiedad;
 import com.EquipoB.AlquilerQuinchos.Servicios.ServicioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,9 @@ public class ControladorImagen {
     @Autowired
     private ServicioUsuario servicioUsuario;
     @Autowired
-    private ServicioPropiedad servicioPropiedad;
+    private ServicioImagenPropiedad servicioImagenPropiedad;
     @Autowired
-    private ServicioImagenPropiedad servicioImagen;
+    private ServicioImagenReview servicioImagenReview;
 
     @GetMapping("/perfil/{id}")
     public ResponseEntity<byte[]> imagenUsuario(@PathVariable Long id) {
@@ -46,21 +47,39 @@ public class ControladorImagen {
 
     @GetMapping("/propiedades/{id}")
     public ResponseEntity<byte[]> imagenPropiedad(@PathVariable Long id) {
-        byte[] imgPropiedad = servicioImagen.imagenABite(id);
+        byte[] imgPropiedad = servicioImagenPropiedad.imagenABite(id);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG);
         return new ResponseEntity<>(imgPropiedad, headers, HttpStatus.OK);
     }
 
+    @GetMapping("/reviews/{id}")
+    public ResponseEntity<byte[]> imagenReview(@PathVariable Long id) {
+        byte[] imgReview = servicioImagenReview.imagenABite(id);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        return new ResponseEntity<>(imgReview, headers, HttpStatus.OK);
+    }
+
 
 //    hacer un metodo igual solo que busque imagenes por id de la imagen no de la propiedad
-    @GetMapping("/{id}")
-    public ResponseEntity<byte[]> imagenPropiedades(@PathVariable Long id) {
-        byte[] imgPropiedad = servicioImagen.imagenABite(id);
+    @GetMapping("/propiedad/{id}")
+    public ResponseEntity<byte[]> imagenesPropiedad(@PathVariable Long id) {
+        byte[] imgPropiedad = servicioImagenPropiedad.imagenABite(id);
        HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG);
        return new ResponseEntity<>(imgPropiedad, headers, HttpStatus.OK);
    }
+
+    @GetMapping("/review/{id}")
+    public ResponseEntity<byte[]> imagenesReview(@PathVariable Long id) {
+        byte[] imgReview = servicioImagenReview.imagenABite(id);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        return new ResponseEntity<>(imgReview, headers, HttpStatus.OK);
+    }
+
+
 
 
 }

@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Getter @Setter @ToString @AllArgsConstructor
@@ -19,6 +20,9 @@ public class Review {
     private Integer puntuacion;
     private String comentario;
     private LocalDate fecha;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "review", fetch = FetchType.LAZY)
+    private List<ImagenReview> imagenes;
 
     @ManyToOne
     private Propiedad propiedad;
